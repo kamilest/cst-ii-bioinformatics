@@ -26,7 +26,6 @@ ENALTY
 ## Smith-Waterman algorithm
 Modified **Needleman-Wunsch** (global alignment algorithm)
 
-* ignore badly aligning regions
-* initialise first row and first column to 0 with no penalty
-* don't give negative score: clip to 0
-* *best* local alignment: `s_opt = max_{i,j} s[i, j]`
+* Ignore badly aligning regions
+* *Best* local alignment: `s_opt = max_{i,j} s[i, j]`
+* The local alignment algorithm introduces zero-weight edges connecting the source (0, 0) to every other node in the alignment graph, as well as zero-weight edges connecting every node to the sink node.
