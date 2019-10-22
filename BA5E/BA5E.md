@@ -22,3 +22,10 @@ Sample output
 PLEASANTLY
 -MEA--N-LY
 ```
+
+## Needleman-Wunsch algorithm
+* Initialise first row and column to the `cells to source * penalty`
+* Dynamic programming: highest score between
+  * indel
+  * match or mismatch
+* Backtrack as appropriate: left, right, diagonal step. Going back through the coordinates from sing to source returns the original path.
