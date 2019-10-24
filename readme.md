@@ -17,6 +17,7 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 [BA5H](http://rosalind.info/problems/ba5h/)|Find a Highest-Scoring Fitting Alignment of Two Strings
 [BA5I](http://rosalind.info/problems/ba5i/)|Find a Highest-Scoring Overlap Alignment of Two Strings
 [BA5J](http://rosalind.info/problems/ba5j/)|Align Two Strings Using Affine Gap Penalties
+[BA5K](http://rosalind.info/problems/ba5k/)|Find a Middle Edge in an Alignment Graph in Linear Space
 
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
