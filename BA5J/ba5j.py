@@ -11,27 +11,37 @@ def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extensio
     # Only vertical edges with weight -e to represent gap extensions in v
     lower = np.matrix(np.ones((len(v)+1, len(w)+1)) * -np.inf)
 
-    backtrack = {}
+    backtrack_lower = {}
+    backtrack_middle = {}
+    backtrack_upper = {}
 
     # Initialise first row and column
     for i in range(1, len(v)+1):
-        # middle[i, 0] = - gap_opening_penalty - (i-1) * gap_extension_penalty
+        middle[i, 0] = - gap_opening_penalty - (i-1) * gap_extension_penalty
         lower[i, 0] = - gap_opening_penalty - (i-1) * gap_extension_penalty
-        backtrack[(i, 0)] = (i-1, 0)
+        backtrack_lower[(i, 0)] = 'lower'
     
     for j in range(1, len(w)+1):
-        # middle[0, j] = - gap_opening_penalty - (j-1) * gap_extension_penalty
+        middle[0, j] = - gap_opening_penalty - (j-1) * gap_extension_penalty
         upper[0, j] = - gap_opening_penalty - (j-1) * gap_extension_penalty
-        backtrack[(0, j)] = (0, j-1)
+        backtrack_upper[(0, j)] = 'upper'
 
     # Dynamic programming
     for i in range(1, len(v)+1):
         for j in range(1, len(w)+1):
             lower[i, j] = max(middle[i-1, j] - gap_opening_penalty, \
                 lower[i-1, j] - gap_extension_penalty)
+            if lower[i, j] == middle[i-1, j] - gap_opening_penalty:
+                backtrack_lower[(i, j)] = 'middle'
+            else:
+                backtrack_lower[(i, j)] = 'lower'
             
             upper[i, j] = max(middle[i, j-1] - gap_opening_penalty, \
                 upper[i, j-1] - gap_extension_penalty)
+            if upper[i, j] == middle[i, j-1] - gap_opening_penalty:
+                backtrack_upper[(i, j)] = 'middle'
+            else:
+                backtrack_upper[(i, j)] = 'upper'
 
             # If match or mismatch
             score = scoring_matrix[(v[i-1], w[j-1])]
@@ -40,39 +50,47 @@ def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extensio
 
             # Backtrack to previous coordinate
             if middle[i, j] == middle[i-1, j-1] + score:
-                backtrack[(i, j)] = (i-1, j-1)
+                backtrack_middle[(i, j)] = 'middle'
             elif middle[i, j] == lower[i, j]:
-                backtrack[(i, j)] = (i-1, j)
+                backtrack_middle[(i, j)] = 'lower'
             elif middle[i, j] == upper[i, j]:
-                backtrack[(i, j)] = (i, j-1)
+                backtrack_middle[(i, j)] = 'upper'
                 
     score = middle[len(v), len(w)]
-    print(middle)
-    print(lower)
-    print(upper)
+    backtrack_matrix = 'middle'
 
     # Backtrack to find alignments
     i, j = len(v), len(w)
     v_aligned, w_aligned = '', ''
-    while i > 0 or j > 0:
-        if i > 0 and backtrack[(i, j)] == (i-1, j):
+    while i > 0 and j > 0:
+        if backtrack_matrix == 'middle':
+            if backtrack_middle[(i, j)] == 'upper':
+                backtrack_matrix = 'upper'
+            elif backtrack_middle[(i, j)] == 'lower':
+                backtrack_matrix = 'lower'
+            else:
+                i, j = i-1, j-1
+                v_aligned = v[i] + v_aligned
+                w_aligned = w[j] + w_aligned
+        elif backtrack_matrix == 'lower':
+            if backtrack_lower[(i, j)] == 'middle':
+                backtrack_matrix = 'middle'
             i-=1
             v_aligned = v[i] + v_aligned
             w_aligned = '-' + w_aligned
-        elif j > 0 and backtrack[(i, j)] == (i, j-1):
+
+        elif backtrack_matrix == 'upper':
+            if backtrack_upper[(i, j)] == 'middle':
+                backtrack_matrix = 'middle'
             j-=1
             v_aligned = '-' + v_aligned
-            w_aligned = w[j] + w_aligned
-        else:
-            i, j = i-1, j-1
-            v_aligned = v[i] + v_aligned
             w_aligned = w[j] + w_aligned
     
     return (int(score), v_aligned, w_aligned)
 
 
 # Parse the input
-f = open('ba5j.txt', 'r')
+f = open('rosalind_ba5j.txt', 'r')
 v = f.readline().strip()
 w = f.readline().strip()
 f.close()
