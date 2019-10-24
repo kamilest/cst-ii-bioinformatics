@@ -1,44 +1,55 @@
 import numpy as np
 
 def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extension_penalty):
-    s = np.zeros((len(v)+1, len(w)+1))
+    # Diagonal edges of weight Score(vi, wj) representing matches and mismatches
+    middle = np.matrix(np.ones((len(v)+1, len(w)+1)) * -np.inf)
+    middle[0, 0] = 0
+
+    # Only horizontal edges with weights -e to represent gap extensions in w
+    upper = np.matrix(np.ones((len(v)+1, len(w)+1)) * -np.inf)
+
+    # Only vertical edges with weight -e to represent gap extensions in v
+    lower = np.matrix(np.ones((len(v)+1, len(w)+1)) * -np.inf)
+
     backtrack = {}
 
     # Initialise first row and column
     for i in range(1, len(v)+1):
-        s[i, 0] = - gap_opening_penalty - (i-1) * gap_extension_penalty
+        # middle[i, 0] = - gap_opening_penalty - (i-1) * gap_extension_penalty
+        lower[i, 0] = - gap_opening_penalty - (i-1) * gap_extension_penalty
         backtrack[(i, 0)] = (i-1, 0)
     
     for j in range(1, len(w)+1):
-        s[0, j] = - gap_opening_penalty - (j-1) * gap_extension_penalty
+        # middle[0, j] = - gap_opening_penalty - (j-1) * gap_extension_penalty
+        upper[0, j] = - gap_opening_penalty - (j-1) * gap_extension_penalty
         backtrack[(0, j)] = (0, j-1)
 
     # Dynamic programming
     for i in range(1, len(v)+1):
         for j in range(1, len(w)+1):
-            # Have to remember best scores when gap is or is not open???
-
-            # Going down or right
-            down_penalty = gap_extension_penalty \
-                if backtrack[(i-1, j)] == (i-2, j) else gap_opening_penalty
-            right_penalty = gap_extension_penalty \
-                if backtrack[(i, j-1)] == (i, j-2) else gap_opening_penalty
-            s[i, j] = max(s[i-1, j] - down_penalty, s[i, j-1] - right_penalty)
+            lower[i, j] = max(middle[i-1, j] - gap_opening_penalty, \
+                lower[i-1, j] - gap_extension_penalty)
+            
+            upper[i, j] = max(middle[i, j-1] - gap_opening_penalty, \
+                upper[i, j-1] - gap_extension_penalty)
 
             # If match or mismatch
             score = scoring_matrix[(v[i-1], w[j-1])]
-            s[i, j] = max(s[i, j], \
-                          s[i-1, j-1] + score)
-    
+            middle[i, j] = np.amax([middle[i-1, j-1] + score, \
+                lower[i, j], upper[i, j]])
+
             # Backtrack to previous coordinate
-            if s[i, j] == s[i-1, j-1] + score:
+            if middle[i, j] == middle[i-1, j-1] + score:
                 backtrack[(i, j)] = (i-1, j-1)
-            elif s[i, j] == s[i-1, j] - down_penalty:
+            elif middle[i, j] == lower[i, j]:
                 backtrack[(i, j)] = (i-1, j)
-            elif s[i, j] == s[i, j-1] - right_penalty:
+            elif middle[i, j] == upper[i, j]:
                 backtrack[(i, j)] = (i, j-1)
                 
-    score = s[len(v), len(w)]
+    score = middle[len(v), len(w)]
+    print(middle)
+    print(lower)
+    print(upper)
 
     # Backtrack to find alignments
     i, j = len(v), len(w)
@@ -61,7 +72,7 @@ def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extensio
 
 
 # Parse the input
-f = open('rosalind_ba5j.txt', 'r')
+f = open('ba5j.txt', 'r')
 v = f.readline().strip()
 w = f.readline().strip()
 f.close()
