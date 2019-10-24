@@ -4,6 +4,20 @@ Algorithms<sup id="a1">[1](#f1)</sup> for the Part II [Bioinformatics](https://w
 
 Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](http://rosalind.info/problems/list-view/?location=bioinformatics-textbook-track).
 
+
+## 5. Comparing DNA Sequences
+| ID | Title |
+|--|--|
+[BA5B](http://rosalind.info/problems/ba5b/)|Find the Length of a Longest Path in a Manhattan-like Grid
+[BA5C](http://rosalind.info/problems/ba5c/)|Find a Longest Common Subsequence of Two Strings
+[BA5D](http://rosalind.info/problems/ba5d/)|Find the Longest Path in a DAG
+[BA5E](http://rosalind.info/problems/ba5e/)|Find a Highest-Scoring Alignment of Two Strings
+[BA5F](http://rosalind.info/problems/ba5f/)|Find a Highest-Scoring Local Alignment of Two Strings
+[BA5G](http://rosalind.info/problems/ba5g/)|Compute the Edit Distance Between Two Strings
+[BA5H](http://rosalind.info/problems/ba5h/)|Find a Highest-Scoring Fitting Alignment of Two Strings
+[BA5I](http://rosalind.info/problems/ba5i/)|Find a Highest-Scoring Overlap Alignment of Two Strings
+[BA5J](http://rosalind.info/problems/ba5j/)|Align Two Strings Using Affine Gap Penalties
+
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
 
