@@ -23,6 +23,7 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 | ID | Title |
 |:-|:-|
 [BA7A](http://rosalind.info/problems/ba7a/)|Compute Distances Between Leaves
+[BA7B](http://rosalind.info/problems/ba7b/)|Compute Limb Lengths in a Tree
 
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
