@@ -7,7 +7,7 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 
 ## 5. Comparing DNA Sequences
 | ID | Title |
-|--|--|
+|:--|:--|
 [BA5B](http://rosalind.info/problems/ba5b/)|Find the Length of a Longest Path in a Manhattan-like Grid
 [BA5C](http://rosalind.info/problems/ba5c/)|Find a Longest Common Subsequence of Two Strings
 [BA5D](http://rosalind.info/problems/ba5d/)|Find the Longest Path in a DAG
@@ -18,6 +18,11 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 [BA5I](http://rosalind.info/problems/ba5i/)|Find a Highest-Scoring Overlap Alignment of Two Strings
 [BA5J](http://rosalind.info/problems/ba5j/)|Align Two Strings Using Affine Gap Penalties
 [BA5K](http://rosalind.info/problems/ba5k/)|Find a Middle Edge in an Alignment Graph in Linear Space
+
+## 7. Phylogeny Trees
+| ID | Title |
+|:-|:-|
+[BA7A](http://rosalind.info/problems/ba7a/)|Compute Distances Between Leaves
 
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)

@@ -33,3 +33,5 @@ Sample Output
 ## Background
 
 Define the length of a path in a tree as the sum of the lengths of its edges (rather than the number of edges on the path). As a result, the evolutionary distance between two present-day species corresponding to leaves $i$ and $j$ in a tree $T$ is equal to the length of the unique path connecting $i$ and $j$, denoted $d_{i, j}(T)$.
+
+Since the undirected edges in the tree are treated as bidirectional and the tree cannot contain cycles, it means that between every two nodes there is a unique path. (Proof by contradiction: Suppose there were two paths. Then there must be a cycle somewhere in the graph, which means that the graph is not a tree.)
