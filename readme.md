@@ -19,11 +19,12 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 [BA5J](http://rosalind.info/problems/ba5j/)|Align Two Strings Using Affine Gap Penalties
 [BA5K](http://rosalind.info/problems/ba5k/)|Find a Middle Edge in an Alignment Graph in Linear Space
 
-## 7. Phylogeny Trees
+## 7. Evolutionary Trees
 | ID | Title |
 |:-|:-|
 [BA7A](http://rosalind.info/problems/ba7a/)|Compute Distances Between Leaves
 [BA7B](http://rosalind.info/problems/ba7b/)|Compute Limb Lengths in a Tree
+[BA7C](http://rosalind.info/problems/ba7c/)|Implement AdditivePhylogeny 
 
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
