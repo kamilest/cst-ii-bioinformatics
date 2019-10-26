@@ -17,27 +17,33 @@ def limb_length(dist_matrix, leaf):
 
 def additive_phylogeny(dist_matrix, n):
     if n == 2:
-        return ({0: [1], 1: [0]}, {(1,0): dist_matrix[1, 0], (0, 1): dist_matrix[0, 1]})
+        return ({0: [1], 1: [0]}, \
+            {(1,0): dist_matrix[1, 0], (0, 1): dist_matrix[0, 1]})
+    
     limb = limb_length(dist_matrix, n-1)
     dist_matrix[:-1, -1] -= limb
     dist_matrix[-1, :-1] -= limb
     
     # Find three leaves such that Di,k = Di,n + Dn,k
     i_leaf, k_leaf = None, None
-    for i in range(n-2):
-        for k in range(i+1, n-1):
-            if dist_matrix[i, k] == \
-                    dist_matrix[i, n-1] + dist_matrix[k, n-1]:
-                i_leaf, k_leaf = i, k
-                break
-    x = dist_matrix[i_leaf, n-1]
+    for k in range(len(dist_matrix)-1):
+        # Removing Di,n from all Di,k (Di,k - Di,n)
+        remaining_length = dist_matrix[k] - dist_matrix[-1]
+        # Find indices where remaining_length = Dn,k
+        # Di,k - Di,n = Dn,k
+        ix = np.where(remaining_length == dist_matrix[k, -1])
+        if len(ix[0] > 0):
+            i_leaf, k_leaf = ix[0][0], k
+            break
 
-    # Recursive call
+    x = dist_matrix[i_leaf, -1]
+
+    # Recursive call for the distance matrix without outer row/col
     (T_neighbours, T_weights) = \
-        additive_phylogeny(dist_matrix, n-1)
+        additive_phylogeny(dist_matrix[:-1, :-1], n-1)
 
-    # Potentially new node in T at distance x from i
-    # on the path between i_leaf and k_leaf
+    # Potentially new node v in T at distance x from i_leaf on the path 
+    # between i_leaf and k_leaf
 
     # new node v
     v = min(len(dist_matrix), max(T_neighbours.keys())+1)
