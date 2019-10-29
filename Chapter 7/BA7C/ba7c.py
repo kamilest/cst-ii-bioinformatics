@@ -18,12 +18,9 @@ def limb_length(dist_matrix, leaf):
 
 def additive_phylogeny(dist_matrix, n):
     def nodes_on_path(T_neighbours, i_leaf, k_leaf, total_n, visited):
-        if i_leaf not in T_neighbours:
-            add_edge(T_neighbours, T_weights, i_leaf, k_leaf, dist_matrix[i_leaf, k_leaf])
         if k_leaf in T_neighbours[i_leaf]:
             return [i_leaf, k_leaf]
         to_visit = list(filter(lambda i: i >= total_n and i not in visited, T_neighbours[i_leaf]))
-        print("unvisited", to_visit)
         if len(to_visit) == 0:
             return []
 
@@ -31,13 +28,12 @@ def additive_phylogeny(dist_matrix, n):
         path = [i_leaf]
 
         for node in to_visit:
-            path.append(nodes_on_path(T_neighbours, node, k_leaf, total_n, visited))
+            path.extend(nodes_on_path(T_neighbours, node, k_leaf, total_n, visited))
             if path[-1] == k_leaf:
                 break
             else:
                 path = [i_leaf]
 
-        print("Nodes on path", path)
         return path
     
     def add_edge(T_neighbours, T_weights, origin, destination, weight):
@@ -54,7 +50,6 @@ def additive_phylogeny(dist_matrix, n):
     # Add leaf with weight limb at distance x from leaf i_keaf on path between leaves i_leaf and k_leaf, potentially creating new v_node
     def add_leaf(T_neighbours, T_weights, i_leaf, k_leaf, x, leaf, limb, total_n):
         path = nodes_on_path(T_neighbours, i_leaf, k_leaf, total_n, set([]))
-        print("Path: ", path)
 
         distance_remaining = x
         origin = i_leaf
@@ -72,9 +67,8 @@ def additive_phylogeny(dist_matrix, n):
                 v_ix = np.amax([k for k, v in T_neighbours.items()])
                 v_node = total_n if v_ix < total_n else v_ix+1
 
-                print("Adding ", leaf, " with limb ", limb, " at node ", v_node, " between ", origin, " and ", destination)
-                print()
-
+                # print("Adding ", leaf, " with limb ", limb, " at node "
+                # v_node, " between ", origin, " and ", destination)
                 T_neighbours[origin].remove(destination)
                 T_neighbours[destination].remove(origin)
                 del T_weights[(origin, destination)]
@@ -101,9 +95,6 @@ def additive_phylogeny(dist_matrix, n):
     limb = limb_length(dist_matrix[:n, :n], n-1)
     dist_matrix[:n-1, n-1] -= limb
     dist_matrix[n-1, :n-1] -= limb
-
-    print(limb, dist_matrix)
-    print()
     
     # Find three leaves such that Di,k = Di,n + Dn,k
     i_leaf, k_leaf = None, None
@@ -112,46 +103,22 @@ def additive_phylogeny(dist_matrix, n):
         remaining_length = dist_matrix[:n-1, k] - dist_matrix[:n-1, n-1]
         # Find indices where remaining_length = Dn,k
         ix = np.where(remaining_length == dist_matrix[n-1, k])
-        if len(ix[0] > 0):
-            i_leaf, k_leaf = ix[0][0], k
+        for j in ix[0]:
+            if j != k:
+                i_leaf, k_leaf = j, k
             break
-
-    # i_leaf, k_leaf = None, None
-    # breakloop = False
-    # for i in range(n-1):
-    #     for k in range(n-1):
-    #         if i != k and dist_matrix[(i, k)] == dist_matrix[(i, n-1)] + \
-    #              dist_matrix[(n-1, k)]:
-    #             x = dist_matrix[(i, n-1)]
-    #             i_leaf = i
-    #             k_leaf = k
-    #             breakloop = True
-    #             break
-    #     if breakloop:
-    #         break
 
     x = dist_matrix[i_leaf, n-1]
     T_neighbours, T_weights = additive_phylogeny(dist_matrix, n-1)
-    print(T_neighbours, T_weights)
 
-    print("Adding node at distance", x, "between", \
-        i_leaf, "and", k_leaf)
-    add_leaf(T_neighbours, T_weights, i_leaf, k_leaf, x, n, limb,\
+    # print("Adding node at distance", x, "between", i_leaf, "and", k_leaf)
+    add_leaf(T_neighbours, T_weights, i_leaf, k_leaf, x, n-1, limb,\
          len(dist_matrix))
     return (T_neighbours, T_weights)
 
-# f = open('ba7c.txt', 'r')
-# n = int(f.readline())
-n = 4
+f = open('rosalind_ba7c.txt', 'r')
+n = int(f.readline())
 
-f = ["0   13  21  22",
-"13  0   12  13",
-"21  12  0   13",
-"22  13  13  0"]
-# f = ["0 21  22 13",
-# "21  0   13 12",
-# "22  13  0 13",
-# "13  12  13 0"]
 dist_matrix = np.zeros((n, n))
 for i, line in enumerate(f):
     values = [int(m) for m in line.strip().split()]
