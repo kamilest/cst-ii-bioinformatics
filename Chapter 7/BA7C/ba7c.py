@@ -15,7 +15,7 @@ def limb_length(dist_matrix, leaf):
 
     return int(length)
 
-
+# Inspired by samuelklee/ucsd-bioinformatics at the point I had given up on bugs
 def additive_phylogeny(dist_matrix, n):
     def nodes_on_path(T_neighbours, i_leaf, k_leaf, total_n, visited):
         if k_leaf in T_neighbours[i_leaf]:
