@@ -4,7 +4,7 @@
 
 **Given**: An integer `n` followed by a space-delimited `n * n` distance matrix.
 
-**Return**: An adjacency list for the ultrametric tree output by UPGMA. Weights should be accurate to three decimal places.
+**Return**: An adjacency list for the ultrametric tree output by UPGMA (Unweighted Pair Group with Arithmetic Mean). Weights should be accurate to three decimal places.
 
 Note on formatting: The adjacency list must have consecutive integer node labels starting from `0`. The `n` leaves must be labeled `0, 1, ..., n-1` in order of their appearance in the distance matrix. Labels for internal nodes may be labeled in any order but must start from n and increase consecutively.
 
