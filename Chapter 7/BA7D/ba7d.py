@@ -1,75 +1,120 @@
 import numpy as np
 
 def upgma(dist_matrix, n):
-    def cluster_distance(dist_matrix, c1, c2):
-        distance = 0
-        for i in c1:
-            for j in c2:
-                distance += dist_matrix[(i, j)]
-        return distance / (len(c1) * len(c2))
+    class Cluster:
+        def __init__(self, label, son=None, daughter=None, size=1):
+            self.label = label
+            self.son = son
+            self.daughter = daughter
+            self.size = size
     
-    def closest_clusters(dist_matrix, clusters):
+    def closest_clusters(cluster_distances, clusters):
         ci, cj = None, None
         min_distance = np.inf
-        for i in range(len(clusters)):
-            for j in range(i+1, len(clusters)):
-                distance = cluster_distance(dist_matrix, \
-                    clusters[i], clusters[j])
-                if distance < min_distance:
-                    ci = i
-                    cj = j
-                    min_distance = distance
+        for i in clusters:
+            for j in clusters:
+                if (i != j):
+                    distance = cluster_distances[i][j]
+                    if distance < min_distance:
+                        ci = i
+                        cj = j
+                        min_distance = distance
 
-        return ci, cj, distance
+        return ci, cj, min_distance
+
+    def remove_cluster_distances(cluster_distances, ci_label, cj_label):
+        del cluster_distances[ci_label]
+        del cluster_distances[cj_label]
+
+        for c in cluster_distances:
+            del cluster_distances[c][ci_label]
+            del cluster_distances[c][cj_label]
+
+    def compute_cnew_distances(clusters, cluster_distances, ci, cj):
+        cnew_distances = {}
+        for cm in clusters:
+            cnew_distances[cm] = \
+                (cluster_distances[ci.label][clusters[cm].label] * ci.size + \
+                 cluster_distances[cj.label][clusters[cm].label] * cj.size) / \
+                    (ci.size + cj.size)
+        
+        return cnew_distances
     
+    def add_cnew_distances(clusters, cluster_distances, cnew_label, cm_label, distance):
+        cluster_distances[cnew_label][cm_label] = distance
+        cluster_distances[cm_label][cnew_label] = distance
+    
+    def add_weights(T_weights, T_ages, cluster):
+        if cluster.son is None or cluster.daughter is None:
+            return T_weights
+        
+        else:
+            label = cluster.label
+            son_label = cluster.son.label
+            daughter_label = cluster.daughter.label
+
+            label_age = T_ages[label]
+            son_age = T_ages[son_label]
+            daughter_age = T_ages[daughter_label]
+
+            T_weights[(label, son_label)] = abs(label_age - son_age)
+            T_weights[(son_label, label)] = abs(label_age - son_age)
+
+            T_weights[(label, daughter_label)] = abs(label_age - daughter_age)
+            T_weights[(daughter_label, label)] = abs(label_age - daughter_age)
+
+            T_weights = add_weights(T_weights, T_ages, cluster.son)
+            T_weights = add_weights(T_weights, T_ages, cluster.daughter)
+        
+        return T_weights
+
     clusters = {}
-    C_distances = {}
-    T_neighbours = {}
+    cluster_distances = {}
+    cnew = len(dist_matrix) - 1
     T_ages = {}
     for i in range(len(dist_matrix)):
-        clusters[i] = set([i]) # (root_node, cluster)
-        T_neighbours[i] = []
+        clusters[i] = Cluster(i)
         T_ages[i] = 0
     
     for i in range(len(dist_matrix)):
-        C_distances[i] = {}
+        cluster_distances[i] = {}
         for j in range(len(dist_matrix)):
-            C_distances[i][j] = dist_matrix[i, j]
+            cluster_distances[i][j] = dist_matrix[i, j]
 
     while len(clusters) > 1:
-        ci, cj, distance = closest_clusters(C_distances, clusters)
-        ci_node, ci_cluster = clusters[ci]
-        cj_node, cj_cluster = clusters[cj]
+        ci, cj, distance = closest_clusters(cluster_distances, clusters)
+        ci_cluster = clusters[ci]
+        cj_cluster = clusters[cj]
 
         # Merge clusters
-        cnew = np.amax([k for k, _ in T_neighbours.items()]) + 1
-        cnew_cluster = ci_cluster.union(cj_cluster)
-        T_ages[cnew] = distance / 2
+        cnew += 1
+        cnew_cluster = Cluster(cnew, ci_cluster, cj_cluster, \
+            ci_cluster.size + cj_cluster.size)
 
-        # Connect node Cnew to Ci and Cj
-        T_neighbours[cnew] = [ci_node, cj_node]
-        T_neighbours[ci_node].append[cnew]
-        T_neighbours[cj_node].append[cnew]
+        T_ages[cnew] = distance / 2.
 
-        # Remove rows and columns of dist_matrix for Ci and Cj
-        del C_distances[(ci, cj)]
-        del C_distances[(cj, ci)]
-        dist_matrix = np.delete(dist_matrix, [ci, cj], 0)
-        dist_matrix = np.delete(dist_matrix, [ci, cj], 1)
-        clusters.remove(clusters[ci])
-        clusters.remove(clusters[cj])
+        # Remove Ci and Cj from clusters
+        del clusters[ci]
+        del clusters[cj]
 
-        dist_to_cnew = [lambda c: cluster_distance(dist_matrix, c, cnew_cluster) for c in clusters]
+        # Computing D(Cnew, C) for each C in clusters
+        cnew_distances = \
+            compute_cnew_distances(clusters, cluster_distances, ci_cluster, cj_cluster)
 
-        clusters.append((cnew, cnew_cluster))
-        
-        
-    root = clusters[0][0]
+        remove_cluster_distances(cluster_distances, ci, cj)
+        cluster_distances[cnew] = {}
+        for cm in cnew_distances:
+            add_cnew_distances(clusters, cluster_distances, cnew, cm, cnew_distances[cm])
 
+        clusters[cnew] = cnew_cluster
 
+    # Binary tree traversal
+    for cluster in clusters.values():
+        T_weights = add_weights({}, T_ages, cluster)
 
+    return T_weights
 
-f = open('ba7d.txt', 'r')
+f = open('rosalind_ba7d.txt', 'r')
 n = int(f.readline())
 
 dist_matrix = np.zeros((n, n))
@@ -77,8 +122,8 @@ for i, line in enumerate(f):
     values = [int(m) for m in line.strip().split()]
     dist_matrix[i, :] = values
 
-(T_neighbours, T_weights) = upgma(dist_matrix, n)
+T_weights = upgma(dist_matrix, n)
 
 # Print tree
 for (v, w) in sorted(T_weights.keys()):
-    print("{}->{}:{}".format(v, w, int(T_weights[(v, w)])))
+    print("{}->{}:{}".format(v, w, "{0:.3f}".format(T_weights[(v, w)])))
