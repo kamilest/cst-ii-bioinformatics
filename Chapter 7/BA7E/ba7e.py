@@ -42,12 +42,11 @@ def neighbour_joining_matrix(dist_matrix):
 
 def neighbour_joining(dist_matrix, labels, n, total_n):
   T_weights = {}
-  print(labels)
 
   if n == 2:
-    T_weights[(m, m+1)] = dist_matrix[0, 1]
-    T_weights[(m+1, m)] = dist_matrix[0, 1]
-    return T_weights
+    T_weights[(labels[0], labels[1])] = dist_matrix[0, 1]
+    T_weights[(labels[1], labels[0])] = dist_matrix[0, 1]
+    return T_weights, labels
 
   dist_nj = neighbour_joining_matrix(dist_matrix)
 
@@ -56,6 +55,7 @@ def neighbour_joining(dist_matrix, labels, n, total_n):
   np.fill_diagonal(mask, np.inf)
   (i, j) = np.unravel_index(np.argmin(dist_nj[mask], axis=None), dist_nj.shape)
   i_label, j_label = labels[i], labels[j]
+  m = max(max(labels)+1, total_n)
 
   delta = (total_distance(dist_matrix, i) - total_distance(dist_matrix, j)) / (n - 2)
   limb_i = (dist_matrix[i, j] + delta) / 2
@@ -70,18 +70,20 @@ def neighbour_joining(dist_matrix, labels, n, total_n):
 
   dist_matrix = np.delete(dist_matrix, [i, j], 0)
   dist_matrix = np.delete(dist_matrix, [i, j], 1)
-  labels.remove(i_label)
-  labels.remove(j_label)
-
-  T_weights = neighbour_joining(dist_matrix, labels, n-1, m)
+  for ix in sorted([i, j], reverse=True):
+    del labels[ix]
   labels.append(m)
+  
+  (T_weights, labels) = neighbour_joining(dist_matrix, labels, n-1, total_n)
 
-  T_weights[(i_label, m)] = T_weights[(m, i_label)] = limb_i
-  T_weights[(j_label, m)] = T_weights[(m, j_label)] = limb_j
+  T_weights[(i_label, m)] = limb_i
+  T_weights[(m, i_label)] = limb_i
+  T_weights[(j_label, m)] = limb_j
+  T_weights[(m, j_label)] = limb_j
 
-  return T_weights
+  return T_weights, labels
 
-f = open('ba7e.txt', 'r')
+f = open('rosalind_ba7e.txt', 'r')
 n = int(f.readline())
 
 dist_matrix = np.zeros((n, n))
@@ -90,7 +92,8 @@ for i, line in enumerate(f):
   dist_matrix[i, :] = values
 
 # lengths to track node labels as columns in dist_matrix get removed
-T_weights = neighbour_joining(dist_matrix, list(range(len(dist_matrix))), n, n)
+(T_weights, _) = \
+  neighbour_joining(dist_matrix, list(range(len(dist_matrix))), n, n)
 
 # Print tree
 for (v, w) in sorted(T_weights.keys()):
