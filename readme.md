@@ -27,6 +27,7 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 [BA7C](http://rosalind.info/problems/ba7c/)|Implement AdditivePhylogeny 
 [BA7D](http://rosalind.info/problems/ba7d/)|Implement UPGMA
 [BA7E](http://rosalind.info/problems/ba7e/)|Implement the Neighbor Joining Algorithm
+[BA7F](http://rosalind.info/problems/ba7f/)|Implement SmallParsimony
 
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
