@@ -50,6 +50,7 @@ def small_parsimony_bottom_up(node):
       sj = [node.right.scores[ix][j] + delta(j, k) for j in 'ACTG']
       
       s[k] = min(si) + min(sj)
+  
 
 def small_parsimony_top_down(node):
   if node is None or node.left is None or node.right is None:
@@ -58,29 +59,30 @@ def small_parsimony_top_down(node):
   min_scores = []
   for s in node.scores:
     sc = [s[k] for k in 'ACTG']
+    min_scores.append(min(sc))
+
     sc_ix = np.argmin(sc)
-    min_scores.append(sc[sc_ix])
-    node.characters += 'ACTG'[sc_ix]
+    # node.characters += 'ACTG'[sc_ix]
   
   node.min_score = np.sum(min_scores)
 
   small_parsimony_top_down(node.left)
   small_parsimony_top_down(node.right)
 
-def print_small_parsimony(T):
-  def label_delta(characters_i, characters_j):
+def print_small_parsimony(T, T_adj):
+  def hamming_distance(characters_i, characters_j):
     sum = 0
     for i, j in zip(characters_i, characters_j):
       sum += 0 if i == j else 1
     return sum 
 
   print(T[max(T)].min_score)
-  for k in reversed(sorted(T.keys())):
-    if T[k].left is not None and T[k].right is not None:
-      print("{}->{}:{}".format(T[k].left.characters, T[k].characters, label_delta(T[k].left.characters, T[k].characters)))
-      print("{}->{}:{}".format(T[k].right.characters, T[k].characters, label_delta(T[k].right.characters, T[k].characters)))      
+  for (v, w) in sorted(T_adj):
+    print(v, w)
+    print("{}->{}:{}".format(T[v].characters, T[w].characters, hamming_distance(T[v].characters, T[w].characters)))
 
 T = {}
+T_adj = []
 label = 0
 
 f = open('ba7f.txt', 'r')
@@ -105,10 +107,13 @@ for line in f:
     T[v].left = T[u]
   else:
     T[v].right = T[u]
+  
+  T_adj.append((u, v))
+  T_adj.append((v, u))
 
 f.close()
 
 # Assuming maximum key is the root
 root = T[max(T)]
 small_parsimony(root)
-print_small_parsimony(T)
+print_small_parsimony(T, T_adj)
