@@ -1,6 +1,8 @@
 import numpy as np
 import re
 
+alphabet = 'ACTG'
+
 class ParsimonyNode:
   def __init__(self, label, tag=0, characters=''):
     self.label = label
@@ -28,7 +30,7 @@ class ParsimonyNode:
 
 def small_parsimony(node):
   small_parsimony_bottom_up(node)
-  small_parsimony_top_down(node)
+  small_parsimony_top_down(node, None)
 
 def small_parsimony_bottom_up(node):
   def delta(i, k):
@@ -44,35 +46,42 @@ def small_parsimony_bottom_up(node):
 
   for i in range(len(node.left.scores)):
     node.scores.append({})
-    node.backtrack.append({})
+    node.left.backtrack.append({})
+    node.right.backtrack.append({})
 
   for ix, s in enumerate(node.scores):
-    for k in 'ACTG':
-      si = [node.left.scores[ix][i] + delta(i, k) for i in 'ACTG']
-      node.left.backtrack[ix][k] = 'ATCG'[np.argmin(si)]
+    for k in alphabet:
+      si = [node.left.scores[ix][i] + delta(i, k) for i in alphabet]
+      node.left.backtrack[ix][k] = alphabet[np.argmin(si)]
 
-      sj = [node.right.scores[ix][j] + delta(j, k) for j in 'ACTG']
-      node.right.backtrack[ix][k] = 'ATCG'[np.argmin(sj)]
+      sj = [node.right.scores[ix][j] + delta(j, k) for j in alphabet]
+      node.right.backtrack[ix][k] = alphabet[np.argmin(sj)]
       
       s[k] = min(si) + min(sj)
   
 
-def small_parsimony_top_down(node):
+def small_parsimony_top_down(node, characters):
   if node is None or node.left is None or node.right is None:
     return
   
   min_scores = []
+  argmin_scores = []
   for s in node.scores:
-    sc = [s[k] for k in 'ACTG']
+    sc = [s[k] for k in alphabet]
     min_scores.append(min(sc))
+    argmin_scores.append(np.argmin(sc))
 
-    sc_ix = np.argmin(sc)
-    # node.characters += 'ACTG'[sc_ix]
+    
+  if characters is None:
+    node.characters = ''.join([alphabet[i] for i in argmin_scores])
+  else:
+    for ix, symbol_backtrack in enumerate(node.backtrack):
+      node.characters += symbol_backtrack[characters[ix]]
   
   node.min_score = np.sum(min_scores)
 
-  small_parsimony_top_down(node.left)
-  small_parsimony_top_down(node.right)
+  small_parsimony_top_down(node.left, node.characters)
+  small_parsimony_top_down(node.right, node.characters)
 
 def print_small_parsimony(T, T_adj):
   def hamming_distance(characters_i, characters_j):
@@ -83,14 +92,13 @@ def print_small_parsimony(T, T_adj):
 
   print(T[max(T)].min_score)
   for (v, w) in sorted(T_adj):
-    print(v, w)
     print("{}->{}:{}".format(T[v].characters, T[w].characters, hamming_distance(T[v].characters, T[w].characters)))
 
 T = {}
 T_adj = []
 label = 0
 
-f = open('ba7f.txt', 'r')
+f = open('rosalind_ba7f.txt', 'r')
 n = int(f.readline())
 
 for line in f:
