@@ -12,8 +12,9 @@ class ParsimonyNode:
     # Stores scores for all the characters rather than running the 
     # algorithm for each position in the string
     self.scores = []
+    self.backtrack = []
 
-    for c in characters:
+    for c in self.characters:
       self.scores.append({'A': np.inf, 'C': np.inf, 'T': np.inf, 'G': np.inf})
       self.scores[-1][c] = 0
 
@@ -43,11 +44,15 @@ def small_parsimony_bottom_up(node):
 
   for i in range(len(node.left.scores)):
     node.scores.append({})
+    node.backtrack.append({})
 
   for ix, s in enumerate(node.scores):
     for k in 'ACTG':
       si = [node.left.scores[ix][i] + delta(i, k) for i in 'ACTG']
+      node.left.backtrack[ix][k] = 'ATCG'[np.argmin(si)]
+
       sj = [node.right.scores[ix][j] + delta(j, k) for j in 'ACTG']
+      node.right.backtrack[ix][k] = 'ATCG'[np.argmin(sj)]
       
       s[k] = min(si) + min(sj)
   
