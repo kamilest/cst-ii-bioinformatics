@@ -40,6 +40,7 @@ Taken from the supplementary textbook<sup id="a2">[2](#f2)</sup> and [Rosalind](
 |:-|:-|
 [BA9A](http://rosalind.info/problems/ba9a/)|Construct a Trie from a Collection of Patterns
 [BA9B](http://rosalind.info/problems/ba9b/)|Implement TrieMatching
+[BA9C](http://rosalind.info/problems/ba9c/)|Construct the Suffix Tree of a String
 
 --------------
 <b id="f1">1</b>: *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
