@@ -17,13 +17,10 @@ def limb_length(dist_matrix, leaf):
 
 # Inspired by samuelklee/ucsd-bioinformatics at the point I had given up on bugs
 def additive_phylogeny(dist_matrix, n):
-    # TODO: This has a bug somewhere, oh no...
     def nodes_on_path(T_neighbours, i_leaf, k_leaf, total_n, visited):
-        to_visit = []
-        if i_leaf in T_neighbours:
-            if k_leaf in T_neighbours[i_leaf]:
-                return [i_leaf, k_leaf]
-            to_visit = list(filter(lambda i: i >= total_n and i not in visited, T_neighbours[i_leaf]))
+        if k_leaf in T_neighbours[i_leaf]:
+            return [i_leaf, k_leaf]
+        to_visit = list(filter(lambda i: i >= total_n and i not in visited, T_neighbours[i_leaf]))
         if len(to_visit) == 0:
             return []
 
@@ -119,7 +116,7 @@ def additive_phylogeny(dist_matrix, n):
          len(dist_matrix))
     return (T_neighbours, T_weights)
 
-f = open('ba7c.txt', 'r')
+f = open('rosalind_ba7c.txt', 'r')
 n = int(f.readline())
 
 dist_matrix = np.zeros((n, n))
@@ -127,7 +124,6 @@ for i, line in enumerate(f):
     values = [int(m) for m in line.strip().split()]
     dist_matrix[i, :] = values
 
-print(dist_matrix)
 (T_neighbours, T_weights) = additive_phylogeny(dist_matrix, n)
 
 # Print tree
