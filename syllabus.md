@@ -47,7 +47,7 @@
     - [Progressive alignment](#progressive-alignment)
       - [Method (CLUSTALW)](#method-clustalw)
 - [Genome sequencing](#genome-sequencing)
-  - [Genome sequencing problem**](#genome-sequencing-problem)
+  - [Genome sequencing problem](#genome-sequencing-problem)
   - [String reconstruction](#string-reconstruction)
     - [Hamiltonian Path](#hamiltonian-path)
       - [Complexity](#complexity-6)
@@ -90,6 +90,7 @@
     - [Method](#method-6)
 
 # Alignment lectures
+
 * Align genome and protein sequences
 * Detect differences at the single base to block of bases
 * RNA: aligning molecule with itself
@@ -126,11 +127,13 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5E
 **Return**: The maximum alignment score of these strings followed by an alignment achieving this maximum score. 
 
 **Complexity**
+
 * Space: $O(mn)$
 * Time: $O(mn)$
 * Backtrace: $O(m+n)$
 
 ### Method
+
 * Initialise first row and column to the `cells to source * penalty`
 * Dynamic programming: highest score between
   * indel
@@ -153,11 +156,13 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5F
 **Return**: The maximum score of a local alignment of the strings, followed by a local alignment of these strings achieving the maximum score.
 
 **Complexity**:
+
 * Space: $O(mn)$
 * Time: $O(mn)$
 * Backtrace: $O(m+n)$
 
 ### Method
+
 * Initialise first row and column to 0
 * Dynamic programming: highest score between
   * 0
@@ -165,6 +170,7 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5F
   * match or mismatch
 
 ## Affine gap
+
 * Fixed penalty $\sigma$ might be a problem
 * Affine gap penalty for gap lenth $k$: $\sigma + \varepsilon(k-1)$
   * $\sigma$ gap opening penalty
@@ -181,11 +187,13 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5F
   * lower and uppter update to max of lower/upper + $\varepsilon$/middle level + $\sigma$
 
 ### Simulating affine gaps by long edges
+
 * $F$ scoring matrix would compute matches/gap opening/gap close (score from $G$ plus score of match)
 * $G$ scoring matrix would compute gap extensions
 * to remember overall optimal alignment need to know the best alignment if gap is still open or if gap is closed
 
 **Complexity** (alignment with gaps):
+
 * Time $O(N^2M)$ for $N > M$
 * Space $O(NM)$
 
@@ -194,10 +202,12 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5F
 * update scorings within some distance from the diagonal ($|i-j| < k(N)$)
 
 **Complexity**:
+
 * Time $O(N \cdot k(N)) \ll O(N^2)$
 
 ## Hirschberg algorithm
 Computing alignment with linear memory
+
 * Use two columns at a time and throw away others
 * Detect middle edge based on where the score is highest in the middle column (forward and reverse)
 * Recursively compute other midpoints, throwing the rest of the scoring matrix away
@@ -210,6 +220,7 @@ Computing alignment with linear memory
 **Output**: Middle edge in the alignment graph of these strings
 
 **Complexity**:
+
 * Time $O(nm)$
 * Space $O(n)$
 
@@ -239,12 +250,14 @@ Computing alignment with linear memory
   * $\mathrm{max} \{k: i < k < j\}\ F(i, k) + F(k+1, j)$
 
 **Complexity**:
+
 * $O(n^2)$ terms
 * each taking $O(n)$ in case of bifurcation
 * Time: $O(n^3)$
 * Space: $O(n^2)$
 
 # Phylogeny
+
 * Distance based algorithms (additive phylogeny)
 * UPGMA
 * Neighbour-joining
@@ -252,6 +265,7 @@ Computing alignment with linear memory
 * BA Chapter 7
 
 **Problems**
+
 * Distance matrices to evolutionary trees
 * Distance-based phylogeny construction
 * Additive phylogeny
@@ -264,6 +278,7 @@ Computing alignment with linear memory
 * Progressive alignment
 
 ## Distance-based phylogeny
+
 * Distances based on edit distance in pairwise alignment
 * Minimising *discrepancy* (square root error) between observed distances and tree-based distances (NP-complete).
 
@@ -323,16 +338,19 @@ Also known as *hierarchical clustering.*
 Additive phylogeny works for **additive matrices** only but it is a problem since most of the matrices are not additive.
 
 UPGMA is a more generic algorithm giving a tree *approximately* fitting *any* matrix but can be incorrect.
+
 * constructs a *rooted binary tree*
 * edge weights correspond to the *difference* in ages of the nodes the edge connects
 * builds the correct tree if the *distance matrix is ultrametric* (satisfies the three-point condition).
 
 Want to have a more generic tree fitting algorithm that 
 A tree is *ultrametric* iff the *three-point condition* is satisfied:
+
 * $\forall i,j,k.\ M_{ik} = M_{jk} \geq M_{ij}$
 * distance from any ancestor to its leaves is the same and it is greater than the distance between the leaves
 
 Weaknesses of UPGMA:
+
 * *molecular clock assumption*: implies time is constant for all species
 * certain species evolve much faster
 * typically gives a poor tree
@@ -351,7 +369,9 @@ Time: $O(n^3)$.
 
 ## Neighbour-joining
 Given an $n\times n$ distance matrix $D$ its *neighbour-joining matrix* is the matrix $D^*$ defined as 
+
 $$D^*_{ij}= (n-2)D_{ij} - \mathrm{TotalDistance}_D(i) - \mathrm{TotalDistance}_D(j)$$
+
 where $\mathrm{TotalDistance}_D(i)$ is the sum of distances from $i$ to all other leaves. 
 
 **Neighbour-joining theorem.** If $D$ is additive, then the smallest element of $D^*$ corresponds to neighbouring leaves in $\mathrm{Tree}(D)$.
@@ -368,6 +388,7 @@ where $\mathrm{TotalDistance}_D(i)$ is the sum of distances from $i$ to all othe
 
 #### Complexity
 Neighbor joining on a set of $n$ taxa requires $n-3$ iterations. 
+
 * At each step one has to build and search a $D^*$ matrix. 
 * Initially the matrix is size $n^2$, 
 * then the next step it is $(n-1)^2$, etc. 
@@ -375,6 +396,7 @@ Neighbor joining on a set of $n$ taxa requires $n-3$ iterations.
 
 ## Small (Fitch) parsimony
 #### Character based reconstruction
+
 * distance-based algorithms for evolutionary tree do not say anything about the ancestral states
 * lost information as *multiple alignment is converted to distance matrix*
 * want to reconstruct the tree based on raw information which was used for creating distances (e.g. genetic sequences)
@@ -388,6 +410,7 @@ Minimise the number of events in multiple alignment.
 *Find the most parsimonious labeling (lowest parsimony score) of internal nodes of a rooted tree.*
 
 **Input:** rooted binary tree with each leaf labeled by a string of length $m$.
+
 **Output:** labeling of all other nodes of the tree by strings of length $m$ that *minimises the parsimony score.*
 
 The above can be simplified by computing the parsimony for each symbol separately + repeating/computing in parallel for all other symbols.
@@ -402,6 +425,7 @@ Recurrence relation:
 $$s_k(v) = \min_{\text{symbols}\ i}[s_i(\text{Daughter}(v)) + \delta_{ik}] + \min_{\text{symbols}\ i}[s_i(\text{Son}(v)) + \delta_{ik}]$$
    
 #### Complexity
+
 * $O(mnk^2)$ for tree with $m$ species, $n$ characters, $k$ states (length of string for each species); 
   * arbitrary scoring matrix with some mutations more likely than others
 * $O(mnk)$ if each mutation has the same cost (Walter-Fitch)
@@ -426,11 +450,13 @@ Probabilistic tree proposal and scoring: maximise the likelihood of the tree. Ba
 **Output:** rooted binary tree $T$ that minimises the parsimony score among all possible rooted binary trees with leaves labeled by these strings.
 
 ### Small vs large parsimony
+
 * small parsimony finds *symbols* (of internal nodes) that minimise the score of the tree
 * large parsimony *finds the tree*
   * *Generally NP-complete.*
 
 ### Greedy heuristic
+
 * removing internal edge (connecting two internal nodes) produces four subtrees $W$, $X$, $Y$, $Z$.
 * rearranging subtrees: *nearest neighbour interchange*
   * think of it as *sets* of subtrees on each side
@@ -482,6 +508,7 @@ Probabilistic tree proposal and scoring: maximise the likelihood of the tree. Ba
 
 #### Complexity
 $k$-way alignment with $k$-dimensional Manhattan graph
+
 * $n^k$ nodes
 * most nodes have $2^k-1$ incoming edges
 * runtime: $O(2^k n^k)$
@@ -505,6 +532,7 @@ $k$-way alignment with $k$-dimensional Manhattan graph
 4. Progressive alignment guided by the tree
 
 Not all pairwise alignments build well into a multiple sequence alignment.
+
 * progressive alignment builds final alignment by *merging sub-alignments (bottom-up)* with a guide tree
 
 # Genome sequencing
@@ -512,7 +540,8 @@ Not all pairwise alignments build well into a multiple sequence alignment.
 * generate short *reads*
 * reconstructing the genome from *overlapping reads*
 
-## Genome sequencing problem**
+## Genome sequencing problem
+
 *Reconstruct a genome from reads.*
 
 **Input:** collection of reads
@@ -527,6 +556,7 @@ Not all pairwise alignments build well into a multiple sequence alignment.
 **Output:** genome such that $\text{Composition}_k(\text{Genome})$ is equal to the collection of $k$-mers.
 
 Leads to the reconstruction of genome as a *path* between the different reads so that every $k$-mer is visited (perhaps every *type* of $k$-mer, accounting for multiplicity as several copies of the same DNA are used at a time)
+
 * however repeats would be more frequent than the general multiplicity
 
 ### Hamiltonian Path
@@ -538,16 +568,19 @@ Leads to the reconstruction of genome as a *path* between the different reads so
 NP-Complete.
 
 ### Eulerian Path
+
 * Interpret $k$-mers as edges, nodes on every side of the edge correspond to prefixes and suffixes of neighbouring edges.
 * Merge the *nodes* which have the *same label* (prefix/suffix) on them for the de Bruijn graph.
 * To reconstruct the genome find the *Eulerian path*, visiting each *edge* exactly once.
 
 ### De Bruijn graphs
+
 * represent every $k$-mer as an edge between the prefix and suffix
 * all nodes with identical labels merged together
 * find the *Eulerian cycle* which can be easily converted to a path.
 
 #### Complexity (graph construction)
+
 * for each $k$-mer, 1 edge and up to 2 nodes
 * $O(1)$
 * assume hash map encodes nodes+edges
@@ -557,6 +590,7 @@ NP-Complete.
 
 ### Euler's theorem
 *A graph is Eulerian if it contains an Eulerian cycle. The Eulerian cycle exists if the graph is balanced, i.e. for every node the indegree is equal to the outdegree.*
+
 * Every Eulerian graph is balanced
 * Every balanced and strongly connected graph is Eulerian
 * A node is *semi-balanced* if indegree differs from outdegree by 1
@@ -585,6 +619,7 @@ A *paired $k$-mer* is a pair of $k$-mers at a *fixed* distance $d$ apart in the 
 * (in real world), the distance between $k$-mers is not exact and can include errors
 
 ### String reconstruction from read-pairs
+
 *Reconstruct a string from its paired $k$-mers.*
 
 **Input:** collection of paired $k$-mers.
@@ -592,6 +627,7 @@ A *paired $k$-mer* is a pair of $k$-mers at a *fixed* distance $d$ apart in the 
 **Output:** string such that its $\text{PairedComposition}$ is equal to the collection of paired $k$-mers.
 
 ### Method (paired de Bruijn)
+
 * Construct de Bruijn graph as always but edges have paired labels and nodes are paired
 * Still glue nodes but now such that *paired* labels are the same. 
 * Decreases the number of possibilities for a path—simple unpaired de Bruijn usually gives multiple possible paths so many potential genome assemblies. 
@@ -599,6 +635,7 @@ A *paired $k$-mer* is a pair of $k$-mers at a *fixed* distance $d$ apart in the 
 
 ## Constraints
 Assumptions include:
+
 * *perfect coverage* of genome by reads
   * breaking reads into shorter $k$-mers which are more likely to cover the entire genome
   * long reads for perfect coverage should contain every possible $k$-mer in the composition which is unlikely
@@ -610,6 +647,7 @@ Assumptions include:
 * *distances* between reads within read-pairs are *exact*
 
 # Clustering
+
 * measuring gene expression levels over time
   * usually measured as logarithm of concentration
   * gene expression *vectors*
@@ -618,6 +656,7 @@ Assumptions include:
 * genes in the same cluster have similar behaviour, genes in differenct clusters have different behaviour
 
 ### Clustering problem
+
 *Partition a set of expression vectors into clusters.*
 
 **Input:** collection of $n$ vectors and integer $k$.
@@ -632,6 +671,7 @@ $$d(\text{DataPoint}, \text{Centers}) = \min_{x \in \text{Centers}} d(\text{Data
 $$\text{MaxDistance}(\text{Data}, \text{Centers}) = \max_{\text{DataPoint} \in \text{Data}} d(\text{DataPoint}, \text{Centers})$$
 
 ### $k$-center clustering problem
+
 *Given a set of points $\text{Data}$, find $k$ centers minimising $\text{MaxDistance}(\text{Data}, \text{Centers})$*
 
 **Input:** $\text{Data}, k$
@@ -644,6 +684,7 @@ $$\text{MaxDistance}(\text{Data}, \text{Centers}) = \max_{\text{DataPoint} \in \
 
 ### $k$-center clustering heuristic
 **Farthest first traversal**
+
 1. set *Centers* to the set consisting of single *DataPoint* from *data*
 2. while *Centers* have fewer than $k$ points
    1. set *DataPoint* to a point in *Data* maximising $d(\text{DataPoint}, \text{Centers})$ among all data points
@@ -660,14 +701,17 @@ Maximal distance does ot do well in extreme cases when there are outliers; we ar
 **Output:** $k$ points $\text{Centers}$ that minimises $\text{Distortion}(\text{Data}, \text{Centers})$ over all possible choices of $\text{Centers}$
 
 #### Complexity
+
 *NP-hard* for $k>1$.
 
 ### Center of gravity theorem
+
 *Center of gravity of points in data is the only point solving 1-means clustering problem*
 
 $$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\text{DataPoint}}{|\text{Data}|}$$
 
 ## Lloyd algorithm ($k$-means clustering)
+
 1. Select $k$ arbitrary data points as *Centers* and perform:
 2. *Centers to clusters.* Assign data point to cluster corresponding to nearest center (ties broken arbitrarily).
 3. *Clusters to centers.* After assignment of data points to $k$ clusters, comput new centers as centers of gravity.
@@ -675,16 +719,20 @@ $$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\te
 5. Avoid unlucky initialisations which result in wrong clusters using *farthest first traversal* heuristic, pick $k$ points sequentially so that new point has higher probability of being assigned farther away.
 
 #### Complexity
+
 * $O(nk)$ for assignment of nearest points to centers
 * $O(nk)$ for deriving $k$ new center approximations
 * for $I$ iterations in $d$ dimensions, $O(nkdI)$; $I \sim k$
 
 ### Soft $k$-means clustering
+
 * Lloyd algorithm assigns points to strictly one cluster
 * in soft clustering assign probabilities for each point to be in a certain cluster
 
 ### Expectation maximisation
+
 Instead of assigning a point to one cluster, assign *responsibilities* of each point to every cluster. Two iterative steps: *E* and *M*.
+
 * *E-step.* From the arbitrary parameters (centers) compute the (hidden) *responsibility matrix*–how much does each point depend on a particular center point.
   * compute *responsibilities* by borrowing the laws from statistical mechanics
   $$\text{Force}_{ij} = e^{-\beta \cdot d(\text{Data}_j, \text{Center}_i)}$$
@@ -703,6 +751,7 @@ Pretty much the same as Lloyd algorithm: $O(nkdI)$, for $n$ points, $k$ clusters
 
 
 ## Hierarchical clustering
+
 * Want to know subclusters of each cluster
 * Keep recursively dividing the clusters until the desired number of clusters is achieved.
 * Can choose different *distance functions* (which give different results)
@@ -714,6 +763,7 @@ Pretty much the same as Lloyd algorithm: $O(nkdI)$, for $n$ points, $k$ clusters
 *Dense clusters correspond to regions with a large number of paths.*
 
 E-M algorithm but with matrix multiplication. Multiply the matrix by itself to emphasise the "path density"; then prune regions with small path density (e.g. below some threshold). This leaves some densely connected regions which correspond to clusters.
+
 * Take random walk described by *similarity matrix*
 * After each step weaken distant node links, strengthen nearby links
 * *Expansion* and *inflation* steps to emphasise the paths *within* the cluster than the paths that would *leave* the cluster.
@@ -734,11 +784,13 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
 ![](figs/markov.png)
 
 #### Complexity
+
 * Matrix multiplication (*expansion*) $O(n^3)$
 * *Inflation* $O(n^2)$
 * Generally $O(n^3)$ but the matrices are *generally sparse* which improves the speed as most entries are pruned.
 
 ## Stochastic neighbour embedding (t-SNE)
+
 * Take points in high-dimensional space and faithfully represent them in two-dimensional space *preserving the relative distances* between points.
 * Adapts to the underlying data and cannot be applied to new points as they are added to the dataset.
 * Has a *perplexity* parameter which corresponds to the number of local neighbours that a point is expected to have—balancing attention between local and global aspects of the space.
@@ -763,6 +815,7 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
 * converts moderate distance points to greater distance, separating non-neighbouring points
 
 # Genomics pattern matching
+
 * mapping low-divergent sequences against a large reference genome
 * using a reference genome to help reconstruct the new sample genome faster by recognising the parts matching the reference rather than assembling from scratch
 * *read mapping*: determining where each read has high similarity to the reference genome
@@ -787,6 +840,7 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
   * $O(|\text{Patterns}| \times |\text{Genome}|)$ for a collection of patterns
 
 ## Using tries for pattern matching
+
 * sliding the trie down the genome
 * walk down the trie to see if the substring starting at that genome position matches any pattern in the trie.
 
@@ -799,6 +853,7 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
 ## Burrows-Wheeler transform
 
 ### Method
+
 * form a $N\times N$ matrix by cyclically rotating the text to form the rows
 * lexicographically sort the rotated rows
 * the last row is the Burrows-Wheeler transform
