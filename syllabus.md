@@ -1,4 +1,9 @@
+---
+geometry: margin=30mm
+---
+
 # Bioinformatics syllabus
+
 - [Bioinformatics syllabus](#bioinformatics-syllabus)
 - [Alignment lectures](#alignment-lectures)
   - [Longest common subsequence](#longest-common-subsequence)
