@@ -895,7 +895,7 @@ TODO more details on t-SNE with equations if needed
 ## Three problems of HMMs
 1. **Evaluation.** Given a HMM $M$ and a sequence $x$, find probability of the *observable sequence* $\mathrm{Pr}(x|M)$ over all possible paths (i.e. $\sum_\pi \mathrm{Pr}(x, \pi|M)$)—solved by *Forward algorithm*
 2. **Decoding.** Given a HMM $M$ and a sequence $x$, find the *hidden state sequence* $\pi$ that maximises $\mathrm{Pr}(x, \pi|M)$ (i.e. $\mathrm{argmax}_\pi \mathrm{Pr}(x, \pi |M)$)—solved by *Viterbi algorithm*
-3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x|\theta)$
+3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x|\theta)$—solved by *Baum-Welch learning*
 
 where model $M$ is defined by architecture – alphabet $\Sigma$, states $S$ (or $Q$) – and parameters $\theta = (E, T)$ ($T$ can also be denoted as $A$ or $a_{ij}$, $E$ can be denoted as $e_i[\cdot]$).
 
@@ -1013,6 +1013,17 @@ $$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N| \pi_i 
 
 ## Baum-Welch learning
 
+*Expectation maximisation (EM) algorithm for parameter estimation.*
+
+Start with estimators for parameters:
+
+$$
+T'_{lk} = \frac{T_{lk}}{\sum_j T_{lj}}
+$$
+
+$$
+E'_{kb} = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}
+$$
 <!-- ## Gillespie algorithm
 ### Assumptions -->
 
@@ -1021,18 +1032,4 @@ $$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N| \pi_i 
 http://ocw.mit.edu/7-91JS14
 
 https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-047-computational-biology-fall-2015/index.htm
-
---------------------
-
-Sequence database search. Blast. (see notes and textbooks)
-Genomics Pattern Matching. Suffix Tree String Compression and the Burrows-Wheeler Transform. (Vol. 2, chapter 9)
-Hidden Markov Models. The Viterbi algorithm, profile HMMs for sequence alignment, classifying proteins with profile HMMs, soft decoding problem, Baum-Welch learning. (Vol. 2, chapter 10)
-
-
-* BLAST, scpaced seed, PH
-* BWT
-
-* Gibbs sampling
-* accessibility list, adjacency list, Wagner algorithm 
-
 
