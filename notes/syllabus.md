@@ -10,8 +10,3 @@
   * banded DP variant
 * Alignment in linear space problem (Hirschberg)
 * Nussinov RNA folding algorithm
-
-- [Bioinformatics syllabus](#bioinformatics-syllabus)
-  - [Alignment lectures](#alignment-lectures)
-
-
