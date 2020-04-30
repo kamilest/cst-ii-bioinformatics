@@ -1,6 +1,7 @@
 ---
 title: Alignment
 author: Kamile Stankeviciute
+category: Alignment
 layout: post
 mathjax: true
 ---
