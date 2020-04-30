@@ -1,3 +1,9 @@
+---
+layout: default
+title: Phylogeny
+nav_order: 3
+---
+
 # Phylogeny
 - [Phylogeny](#phylogeny)
   - [Distance-based phylogeny problem](#distance-based-phylogeny-problem)
