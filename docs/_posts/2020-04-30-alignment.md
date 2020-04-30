@@ -7,14 +7,7 @@ layout: post
 mathjax: true
 ---
 
-* Align genome and protein sequences
-* Detect differences at the single base to block of bases
-* RNA: aligning molecule with itself
-* *Dynamic programming algorithms*
-* BA Chapter 5
-
-
-# Longest common subsequence
+## Longest common subsequence
 
 https://github.com/kamilest/ii-bioinformatics/tree/master/BA5C
 
@@ -31,11 +24,11 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5C
 * Edit distance over Hamming distance–DP method of solving through edit graphs
 
 
-# Needleman-Wunsch
+## Needleman-Wunsch
 
 https://github.com/kamilest/ii-bioinformatics/tree/master/BA5E
 
-## Global alignment problem
+### Global alignment problem
 *Find the highest-scoring alignment between two strings using a scoring matrix.*
 
 **Given**: Two amino acid strings and a scoring matrix.
