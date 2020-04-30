@@ -1,3 +1,11 @@
+---
+layout: default
+title: Clustering
+nav_order: 2
+---
+
+{: toc}
+
 # Clustering
 
 * measuring gene expression levels over time
@@ -7,13 +15,14 @@
 * determining which sets of genes are expressed in similar patterns (and therefore regulated by the same or similar transcription factors)
 * genes in the same cluster have similar behaviour, genes in differenct clusters have different behaviour
 
-### Clustering problem
+## Clustering problem
 
 *Partition a set of expression vectors into clusters.*
 
 **Input:** collection of $n$ vectors and integer $k$.
 
 **Output:** partition of $n$ vectors into $k$ disjoint clusters satisfying the clustering principle (that the distances between points in the same cluster are smaller than to the points in other clusters)
+
 * but the distance clustering principle may be not satisfied even if clusters are visually correct
 * clustering as finding centers
 * iterative algorithm
@@ -22,7 +31,7 @@ $$d(\text{DataPoint}, \text{Centers}) = \min_{x \in \text{Centers}} d(\text{Data
 
 $$\text{MaxDistance}(\text{Data}, \text{Centers}) = \max_{\text{DataPoint} \in \text{Data}} d(\text{DataPoint}, \text{Centers})$$
 
-### $k$-center clustering problem
+## $k$-center clustering problem
 
 *Given a set of points $\text{Data}$, find $k$ centers minimising $\text{MaxDistance}(\text{Data}, \text{Centers})$*
 
@@ -30,11 +39,11 @@ $$\text{MaxDistance}(\text{Data}, \text{Centers}) = \max_{\text{DataPoint} \in \
 
 **Output:** set of $k$ points $\text{Centers}$ that minimises $\text{MaxDistance}(\text{DataPoints}, \text{Centers})$ over all possible choices of $\text{Centers}$
 
-#### Complexity
+### Complexity
 
 *Intractable.*
 
-### $k$-center clustering heuristic
+## $k$-center clustering heuristic
 **Farthest first traversal**
 
 1. set *Centers* to the set consisting of single *DataPoint* from *data*
@@ -46,15 +55,11 @@ Maximal distance does ot do well in extreme cases when there are outliers; we ar
 * minimise *squared error distortion* instead of maximal distance
 * so that all points contribute to it rather than single outlier influences the entire result
 
-### $k$-means clustering problem
+## $k$-means clustering problem
 
 **Input:** $\text{Data}, k$
 
 **Output:** $k$ points $\text{Centers}$ that minimises $\text{Distortion}(\text{Data}, \text{Centers})$ over all possible choices of $\text{Centers}$
-
-#### Complexity
-
-*NP-hard* for $k>1$.
 
 ### Center of gravity theorem
 
@@ -62,7 +67,7 @@ Maximal distance does ot do well in extreme cases when there are outliers; we ar
 
 $$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\text{DataPoint}}{|\text{Data}|}$$
 
-## Lloyd algorithm ($k$-means clustering)
+### Lloyd algorithm ($k$-means clustering)
 
 1. Select $k$ arbitrary data points as *Centers* and perform:
 2. *Centers to clusters.* Assign data point to cluster corresponding to nearest center (ties broken arbitrarily).
@@ -70,13 +75,15 @@ $$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\te
 4. Terminate when the points converge (don't need more than $k$ iterations—intuitively the point cannot be reassinged to a new cluster more than $k$ times)
 5. Avoid unlucky initialisations which result in wrong clusters using *farthest first traversal* heuristic, pick $k$ points sequentially so that new point has higher probability of being assigned farther away.
 
-#### Complexity
+### Complexity
+
+Exact solution for $k$-means clustering: *NP-hard* for $k>1$.
 
 * $O(nk)$ for assignment of nearest points to centers
 * $O(nk)$ for deriving $k$ new center approximations
 * for $I$ iterations in $d$ dimensions, $O(nkdI)$; $I \sim k$
 
-### Soft $k$-means clustering
+## Soft $k$-means clustering
 
 * Lloyd algorithm assigns points to strictly one cluster
 * in soft clustering assign probabilities for each point to be in a certain cluster
@@ -96,10 +103,13 @@ Instead of assigning a point to one cluster, assign *responsibilities* of each p
     * as $\beta < 0$, point depends less on each cluster and strives to be independent
 * *M-step.* From the responsibility matrix and data points recompute the center points that *maximise?* the probability of every center assignment.
 
-#### Complexity
+### Complexity
 [[Source]](https://stackoverflow.com/questions/14051171/what-is-the-computational-complexity-of-the-em-algorithm)
 
-Pretty much the same as Lloyd algorithm: $O(nkdI)$, for $n$ points, $k$ clusters, $d$-dimensional spaces and $I (\not\sim k)$ iterations. *Note no explicit termination condition*.
+Pretty much the same as Lloyd algorithm: 
+
+* $O(nkdI)$, for $n$ points, $k$ clusters, $d$-dimensional spaces and $I (\not\sim k)$ iterations. 
+* *Note no explicit termination condition*.
 
 
 ## Hierarchical clustering
@@ -109,7 +119,9 @@ Pretty much the same as Lloyd algorithm: $O(nkdI)$, for $n$ points, $k$ clusters
 * Can choose different *distance functions* (which give different results)
   * *average distance* between elements in two clusters
   * *minimum distance* between elements in two clusters
-* Can do this bottom-up which reduces to solving UPGMA, with **complexity** $O(n^3)$.
+
+### Complexity
+Can do this *bottom-up* which reduces to solving UPGMA, with complexity $O(n^3)$.
 
 ## Markov clustering algorithm (MCL)
 *Dense clusters correspond to regions with a large number of paths.*
@@ -135,7 +147,7 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
 
 ![](figs/markov.png)
 
-#### Complexity
+### Complexity
 
 * Matrix multiplication (*expansion*) $O(n^3)$
 * *Inflation* $O(n^2)$
