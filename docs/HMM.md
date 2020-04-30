@@ -3,7 +3,7 @@ layout: default
 title: Hidden Markov models
 nav_order: 5
 ---
-
+<!-- 
 # Hidden Markov Models
 - [Hidden Markov Models](#hidden-markov-models)
   - [Three problems of HMMs](#three-problems-of-hmms)
@@ -153,10 +153,6 @@ $$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N\vert  \
 
 Start with estimators for parameters:
 
-$$
-T'_{lk} = \frac{T_{lk}}{\sum_j T_{lj}}
-$$
+$$T'_{lk} = \frac{T_{lk}}{\sum_j T_{lj}}$$
 
-$$
-E'_{kb} = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}
-$$
+$$E'_{kb} = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}$$ -->
