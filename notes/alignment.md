@@ -23,8 +23,8 @@ Edit distance over Hamming distance–DP method of solving through edit graphs.
 * Initialise first row and column to 0.
 
 ### Complexity
-* Time: $O(nm)$ 
-* Space: $O(mn$
+* Time: $O(mn)$ 
+* Space: $O(mn)$
 
 for sequences of length $n$ and $m$.
 
