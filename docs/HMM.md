@@ -1,4 +1,23 @@
+---
+layout: default
+title: Hidden Markov models
+nav_order: 6
+---
+
 # Hidden Markov Models
+- [Hidden Markov Models](#hidden-markov-models)
+  - [Three problems of HMMs](#three-problems-of-hmms)
+  - [Probability of a hidden path](#probability-of-a-hidden-path)
+  - [Probability of an outcome given a hidden path](#probability-of-an-outcome-given-a-hidden-path)
+  - [Decoding problem](#decoding-problem)
+    - [Method (Viterbi algorithm)](#method-viterbi-algorithm)
+    - [Complexity](#complexity)
+  - [Evaluation problem (outcome likelihood)](#evaluation-problem-outcome-likelihood)
+    - [Method (Forward algorithm)](#method-forward-algorithm)
+    - [Complexity](#complexity-1)
+  - [Learning problem](#learning-problem)
+    - [Method (Backward algorithm)](#method-backward-algorithm)
+  - [Baum-Welch learning](#baum-welch-learning)
 
 **Definition.** HMM:
 
@@ -15,11 +34,11 @@
 ## Three problems of HMMs
 1. **Evaluation.** Given a HMM $M$ and a sequence $x$, find probability of the *observable sequence* $\mathrm{Pr}(x|M)$ over all possible paths (i.e. $\sum_\pi \mathrm{Pr}(x, \pi|M)$)—solved by *Forward algorithm*
 2. **Decoding.** Given a HMM $M$ and a sequence $x$, find the *hidden state sequence* $\pi$ that maximises $\mathrm{Pr}(x, \pi|M)$ (i.e. $\mathrm{argmax}_\pi \mathrm{Pr}(x, \pi |M)$)—solved by *Viterbi algorithm*
-3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x|\theta)$—solved by *Baum-Welch learning*
+3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x|\theta)$—solved by *Backward algorithm*/*Baum-Welch learning*
 
 where model $M$ is defined by architecture – alphabet $\Sigma$, states $S$ (or $Q$) – and parameters $\theta = (E, T)$ ($T$ can also be denoted as $A$ or $a_{ij}$, $E$ can be denoted as $e_i[\cdot]$).
 
-### Probability of a hidden path
+## Probability of a hidden path
 
 *Compute the probability of an HMM's hidden path.*
 
@@ -29,7 +48,7 @@ where model $M$ is defined by architecture – alphabet $\Sigma$, states $S$ (or
 
 $$\mathrm{Pr}(\pi) = \prod_{i=1}^n T_{\pi_{i-1}\pi_i}$$
 
-### Probability of an outcome given a hidden path
+## Probability of an outcome given a hidden path
 
 *Compute the probability that an HMM will emit a string given its hidden path.*
 
@@ -44,14 +63,8 @@ We also have
 
 $$\mathrm{Pr}(x, \pi) = \mathrm{Pr}(x|\pi)\mathrm{Pr}(\pi) = \prod_{i=1}^n \mathrm{Pr}(x_|\pi_i)\mathrm{Pr}(\pi_i) = \prod_{i=1}^n T_{\pi_{i-1} \pi_i} E_{\pi_i x_i}$$
 
-<!-- ### Performance
-### Classifying proteins with profile HMMs
 
-### Soft decoding problem -->
-
-## Viterbi algorithm
-
-### Decoding problem
+## Decoding problem
 
 *Find the most optimal hidden path in an HMM given a string of its emitted symbols.*
 
@@ -59,7 +72,9 @@ $$\mathrm{Pr}(x, \pi) = \mathrm{Pr}(x|\pi)\mathrm{Pr}(\pi) = \prod_{i=1}^n \math
 
 **Output:** path $\pi$ that maximises probability $\mathrm{Pr}(x, \pi)$ over all possible paths through this HMM.
 
-**Method:** dynamic programming: the solution from the source to sink corresponds to the maximum of the solutions from the first node to sink multiplied by probabilities of transitioning to that node.
+
+### Method (Viterbi algorithm)
+ dynamic programming: the solution from the source to sink corresponds to the maximum of the solutions from the first node to sink multiplied by probabilities of transitioning to that node.
 
 1. define $s_{k,i}$ as the weight of the optimal path from *source* to node $(k,i)$
 2. *dynamic programming*: first $i-1$ transitions from source to $(k,i)$ must be from an optimal path from source to $(l, i-1)$ for some state $l$.
@@ -86,15 +101,15 @@ traceback:
   path[i-1]* = ptr[path[i], i]
 ```
 
-**Complexity:** runtime is linear in terms of the *number of edges in the Viterbi graph*, which is $O(|S|^2 n)$ where $n$ is the number of emitted symbols (length of string).
+### Complexity
+
+Runtime is linear in terms of the *number of edges in the Viterbi graph*, which is $O(|S|^2 n)$ where $n$ is the number of emitted symbols (length of string).
 
 * Time: $O(|S|^2 n)$
 * Space: $O(|S|n)$
 
 
-## Forward-Backward algorithm
-
-### Outcome likelihood problem
+## Evaluation problem (outcome likelihood)
 
 *Find the probability that an HMM emits a given string.*
 
@@ -102,7 +117,8 @@ traceback:
 
 **Output:** probability $\mathrm{Pr}(x)$ that the HMM emits $x$.
 
-**Method.** *Forward algorithm*: Slight change to the Viterbi algorithm, replacing maximisation with the sum.
+### Method (Forward algorithm)
+Slight change to the Viterbi algorithm, replacing maximisation with the sum.
 
 ```python
 s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
@@ -110,12 +126,12 @@ s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
 ```
 *useful technique:* rescale at each position by multiplying by a constant
 
-**Complexity**
+### Complexity
 
 * Time: $O(|S|^2n)$
 * Space: $O(|S|n)$
 
-## Backward algorithm
+## Learning problem
 
 *Compute the probability distribution of hidden states given the observed states.*
 
@@ -123,7 +139,7 @@ s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
 
 **Output:** $\mathrm{Pr}(\pi_i =k | x)$
 
-**Method.**
+### Method (Backward algorithm)
 
 $$\mathrm{Pr}(\pi_i=k|x) = \mathrm{Pr}(x_1\dots x_i, \pi=k, x_{i+1}\dots x_N)$$
 $$ ... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k) \mathrm{Pr}(x_{i+1} \dots x_N | x_1\dots x_i, \pi_i = k)$$
