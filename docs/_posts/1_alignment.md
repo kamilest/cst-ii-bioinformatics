@@ -1,4 +1,9 @@
-# Alignment lectures
+---
+title: Alignment
+author: Kamile Stankeviciute
+layout: post
+mathjax: true
+---
 
 * Align genome and protein sequences
 * Detect differences at the single base to block of bases
@@ -7,7 +12,7 @@
 * BA Chapter 5
 
 
-## Longest common subsequence
+# Longest common subsequence
 
 https://github.com/kamilest/ii-bioinformatics/tree/master/BA5C
 
@@ -24,11 +29,11 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5C
 * Edit distance over Hamming distance–DP method of solving through edit graphs
 
 
-## Needleman-Wunsch
+# Needleman-Wunsch
 
 https://github.com/kamilest/ii-bioinformatics/tree/master/BA5E
 
-### Global alignment problem
+## Global alignment problem
 *Find the highest-scoring alignment between two strings using a scoring matrix.*
 
 **Given**: Two amino acid strings and a scoring matrix.
@@ -41,7 +46,7 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5E
 * Time: $O(mn)$
 * Backtrace: $O(m+n)$
 
-### Method
+## Method
 
 * Initialise first row and column to the `cells to source * penalty`
 * Dynamic programming: highest score between
@@ -49,7 +54,7 @@ https://github.com/kamilest/ii-bioinformatics/tree/master/BA5E
   * match or mismatch
 * Backtrack as appropriate: left, right, diagonal step. Going back through the coordinates from sing to source returns the original path.
 
-### Overlap detection variant
+## Overlap detection variant
 * Can have unlimited number of gaps at the beginning and the end of the sequence 
 * Initialise first row and column to 0
 

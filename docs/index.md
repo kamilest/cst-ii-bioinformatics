@@ -3,13 +3,11 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-mathjax: true
-
 ---
 
 This site contains the notes for the Computer Science Tripos Part II Bioinformatics course at University of Cambridge.
 
-# Alignment lectures
+## Alignment lectures
 
 * Longest common subsequence
 * Global alignment problem (Needleman-Wunsch)
@@ -19,4 +17,3 @@ This site contains the notes for the Computer Science Tripos Part II Bioinformat
   * banded DP variant
 * Alignment in linear space problem (Hirschberg)
 * Nussinov RNA folding algorithm
-
