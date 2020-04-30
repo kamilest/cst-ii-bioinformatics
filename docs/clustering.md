@@ -169,8 +169,8 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
       $$p_{j|i} = \frac{e^{(\frac{-||x_i-x_j||^2}{2\sigma_i^2})}}{\sum_{k\neq i} e^{\frac{-||x_i-x_j||^2}{2\sigma_i^2}}}$$
       2. probability $x_i$ would define $x_j$ as neighbour
       3. neighbourhood defined by Gausian pdf centered at $x_i$ and variance $\sigma_i^2$
-      4. large $p_{j|i}$ indicates close/similar data points
-      5. small $p_{j|i}$ indicates that $x_j$ is not likely to be a neighbour of $x_i$
+      4. large $p_{j\vert i}$ indicates close/similar data points
+      5. small $p_{j\vert i}$ indicates that $x_j$ is not likely to be a neighbour of $x_i$
       6. $t$-SNE assumes the Student's $t$ distribution instead of the Gaussian for higher efficiency.
    4. Distribution over neighbours based on high-dimensional pairwise distances
 
