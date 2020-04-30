@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Phylogeny
+title: Genome sequencing
 nav_order: 4
 ---
 
