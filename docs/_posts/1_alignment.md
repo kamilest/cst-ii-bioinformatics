@@ -2,6 +2,7 @@
 title: Alignment
 author: Kamile Stankeviciute
 category: Alignment
+date: 2020-04-30
 layout: post
 mathjax: true
 ---
