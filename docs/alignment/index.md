@@ -5,7 +5,27 @@ nav_order: 1
 has_children: true
 ---
 
-{:toc}
+- [Alignment lectures](#alignment-lectures)
+  - [Longest common subsequence](#longest-common-subsequence)
+    - [Method](#method)
+    - [Overlap detection variant](#overlap-detection-variant)
+    - [Complexity](#complexity)
+  - [Global alignment problem](#global-alignment-problem)
+    - [Method (Needleman-Wunsch algorithm)](#method-needleman-wunsch-algorithm)
+    - [Complexity](#complexity-1)
+  - [Local alignment problem](#local-alignment-problem)
+    - [Method (Smith-Waterman algorithm)](#method-smith-waterman-algorithm)
+    - [Complexity](#complexity-2)
+  - [Affine gap variant](#affine-gap-variant)
+    - [Method](#method-1)
+    - [Complexity](#complexity-3)
+  - [Banded dynamic programming](#banded-dynamic-programming)
+    - [Complexity](#complexity-4)
+  - [Alignment in linear memory](#alignment-in-linear-memory)
+    - [Method (Hirschberg algorithm)](#method-hirschberg-algorithm)
+    - [Complexity](#complexity-5)
+  - [Nussinov RNA folding algorithm](#nussinov-rna-folding-algorithm)
+    - [Complexity](#complexity-6)
 
 # Alignment lectures
 
