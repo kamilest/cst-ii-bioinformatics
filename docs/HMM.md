@@ -56,12 +56,12 @@ $$\mathrm{Pr}(\pi) = \prod_{i=1}^n T_{\pi_{i-1}\pi_i}$$
 
 **Ouput:** conditional probability $\mathrm{Pr}(x\vert \pi)$ that $x$ will be emitted given that the HMM follows hidden path $\pi$.
 
-\[\mathrm{Pr}(x\vert \pi) = \prod_{i=1}^n \mathrm{Pr}(x_i \vert  \pi_i) = \prod_{i=1}^n E_{\pi_i x_i}\]
+$$\mathrm{Pr}(x\vert \pi) = \prod_{i=1}^n \mathrm{Pr}(x_i \vert  \pi_i) = \prod_{i=1}^n E_{\pi_i x_i}$$
 
 
 We also have
 
-\[\mathrm{Pr}(x, \pi) = \mathrm{Pr}(x\vert \pi)\mathrm{Pr}(\pi) = \prod_{i=1}^n \mathrm{Pr}(x_\vert \pi_i)\mathrm{Pr}(\pi_i) = \prod_{i=1}^n T_{\pi_{i-1} \pi_i} E_{\pi_i x_i}\]
+$$\mathrm{Pr}(x, \pi) = \mathrm{Pr}(x\vert \pi)\mathrm{Pr}(\pi) = \prod_{i=1}^n \mathrm{Pr}(x_\vert \pi_i)\mathrm{Pr}(\pi_i) = \prod_{i=1}^n T_{\pi_{i-1} \pi_i} E_{\pi_i x_i}$$
 
 
 ## Decoding problem
@@ -141,11 +141,11 @@ s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
 
 ### Method (Backward algorithm)
 
-\[\mathrm{Pr}(\pi_i=k\vert x) = \mathrm{Pr}(x_1\dots x_i, \pi=k, x_{i+1}\dots x_N)\]
+$$\mathrm{Pr}(\pi_i=k\vert x) = \mathrm{Pr}(x_1\dots x_i, \pi=k, x_{i+1}\dots x_N)$$
 
-\[... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k) \mathrm{Pr}(x_{i+1} \dots x_N \vert  x_1\dots x_i, \pi_i = k)\]
+$$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k) \mathrm{Pr}(x_{i+1} \dots x_N \vert  x_1\dots x_i, \pi_i = k)$$
 
-\[... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N\vert  \pi_i = k)\]
+$$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N\vert  \pi_i = k)$$
 
 *useful technique:* rescale at each position by multiplying by a constant
 
@@ -155,6 +155,6 @@ s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
 
 Start with estimators for parameters:
 
-\[T_{lk}' = \frac{T_{lk}}{\sum_j T_{lj}}\]
+$$T_{lk}' = \frac{T_{lk}}{\sum_j T_{lj}}$$
 
-\[E_{kb}' = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}\]
+$$E_{kb}' = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}$$
