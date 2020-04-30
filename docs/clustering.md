@@ -83,7 +83,7 @@ Maximal distance does ot do well in extreme cases when there are outliers; we ar
 
 *Center of gravity of points in data is the only point solving 1-means clustering problem*
 
-$$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\text{DataPoint}}{|\text{Data}|}$$
+$$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\text{DataPoint}}{\vert \text{Data}\vert }$$
 
 ### Lloyd algorithm (\(k\)-means clustering)
 
@@ -112,9 +112,9 @@ Instead of assigning a point to one cluster, assign *responsibilities* of each p
 
 * *E-step.* From the arbitrary parameters (centers) compute the (hidden) *responsibility matrix*–how much does each point depend on a particular center point.
   * compute *responsibilities* by borrowing the laws from statistical mechanics
-  $$\text{Force}_{ij} = e^{-\beta \cdot d(\text{Data}_j, \text{Center}_i)}$$
+  \[\text{Force}_{ij} = e^{-\beta \cdot d(\text{Data}_j, \text{Center}_i)}\]
 
-  $$\text{HiddenMatrix}_{ij} = \frac{\text{Force}_{ij}}{\sum_j \text{Force}_{ij}}$$
+  \[\text{HiddenMatrix}_{ij} = \frac{\text{Force}_{ij}}{\sum_j \text{Force}_{ij}}\]
   * *stiffness* parameter $\beta$ determines the flexibility of each datapoint to be between the two clusters; 
     * as $\beta \rightarrow \infty$ approaching hard $k$-means
     * as $\beta = 0$, point uniformly belongs to every cluster
@@ -156,11 +156,11 @@ E-M algorithm but with matrix multiplication. Multiply the matrix by itself to e
 1. Input undirected graph; *power* parameter $e=2$, *inflation* parameter $r=2$.
 2. Create associated adjacency matrix
 3. Normalise matrix:
-$$M'_{pq} = \frac{M_{pq}}{\sum_i M_{iq}}$$
+\[M_{pq}' = \frac{M_{pq}}{\sum_i M_{iq}}\]
 4. *Expand* by taking $e$-th power of matrix:
-$$M \leftarrow M^e$$
+\[M \leftarrow M^e\]
 5. *Inflate* matrix with inflation parameter $r$:
-$$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
+\[M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}\]
 6. Repeat until convergence (in practice 10-100 steps, fewer if sparse matrix).
 
 ![](figs/markov.png)
@@ -184,7 +184,7 @@ $$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
    2. Kullback-Leibler divergence between probabilities in high- and low-dimensional spaces
    3. Each point in high dimension has conditional probability of picking other points as neighbours
       1. constructing conditional probabilities representing similarity between high-dimensional data points using Euclidean distances
-      $$p_{j|i} = \frac{e^{(\frac{-||x_i-x_j||^2}{2\sigma_i^2})}}{\sum_{k\neq i} e^{\frac{-||x_i-x_j||^2}{2\sigma_i^2}}}$$
+      $$p_{j\vert i} = \frac{e^{(\frac{-\Vert x_i-x_j\Vert ^2}{2\sigma_i^2})}}{\sum_{k\neq i} e^{\frac{-\Vert x_i-x_j\Vert ^2}{2\sigma_i^2}}}$$
       2. probability $x_i$ would define $x_j$ as neighbour
       3. neighbourhood defined by Gausian pdf centered at $x_i$ and variance $\sigma_i^2$
       4. large $p_{j\vert i}$ indicates close/similar data points
