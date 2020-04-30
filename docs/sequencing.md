@@ -3,7 +3,22 @@ layout: default
 title: Genome sequencing
 nav_order: 4
 ---
-
+- [Genome sequencing](#genome-sequencing)
+  - [Genome sequencing problem](#genome-sequencing-problem)
+  - [String reconstruction](#string-reconstruction)
+    - [Hamiltonian path](#hamiltonian-path)
+    - [Complexity](#complexity)
+    - [Eulerian path](#eulerian-path)
+    - [De Bruijn graphs](#de-bruijn-graphs)
+    - [Complexity (De Bruijn graph construction)](#complexity-de-bruijn-graph-construction)
+  - [Finding Eulerian cycle in De Bruijn graph](#finding-eulerian-cycle-in-de-bruijn-graph)
+    - [Euler's theorem](#eulers-theorem)
+    - [Method (Hierholzer)](#method-hierholzer)
+    - [Complexity](#complexity-1)
+  - [Read-pair assembly](#read-pair-assembly)
+    - [String reconstruction from read-pairs](#string-reconstruction-from-read-pairs)
+    - [Method (paired de Bruijn)](#method-paired-de-bruijn)
+    - [Constraints](#constraints)
 
 # Genome sequencing
 * modern sequencing machines cannot read entire genome one nucleotide at a time
