@@ -23,8 +23,8 @@ nav_order: 5
 
 * alphabet $\Sigma$ of emitted symbols
 * set of states $S$
-* transition matrix $T \in \mathbb{R}^{|S| \times |S|}$ representing the probability of going from one state to another, $\forall j. \sum_{i}T_{ij} = 1$
-* emission matrix $E \in \mathbb{R}^{|S| \times |\Sigma|}$, representing the probability of emitting a given symbol from a given state, $\forall j. \sum_{i} E_{ij} = 1$
+* transition matrix $T \in \mathbb{R}^{\vert S\vert  \times \vert S\vert }$ representing the probability of going from one state to another, $\forall j. \sum_{i}T_{ij} = 1$
+* emission matrix $E \in \mathbb{R}^{\vert S\vert  \times \vert \Sigma\vert }$, representing the probability of emitting a given symbol from a given state, $\forall j. \sum_{i} E_{ij} = 1$
 
 
 **Definition.** Hidden path (or *parse*) $\pi = \pi_1 \dots \pi_n$: sequence of states HMM passes through.
@@ -32,9 +32,9 @@ nav_order: 5
 **Definition.** Sequence $x = x_1\dots x_n$ of emitted symbols.
 
 ## Three problems of HMMs
-1. **Evaluation.** Given a HMM $M$ and a sequence $x$, find probability of the *observable sequence* $\mathrm{Pr}(x|M)$ over all possible paths (i.e. $\sum_\pi \mathrm{Pr}(x, \pi|M)$)—solved by *Forward algorithm*
-2. **Decoding.** Given a HMM $M$ and a sequence $x$, find the *hidden state sequence* $\pi$ that maximises $\mathrm{Pr}(x, \pi|M)$ (i.e. $\mathrm{argmax}_\pi \mathrm{Pr}(x, \pi |M)$)—solved by *Viterbi algorithm*
-3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x|\theta)$—solved by *Backward algorithm*/*Baum-Welch learning*
+1. **Evaluation.** Given a HMM $M$ and a sequence $x$, find probability of the *observable sequence* $\mathrm{Pr}(x\vert M)$ over all possible paths (i.e. $\sum_\pi \mathrm{Pr}(x, \pi\vert M)$)—solved by *Forward algorithm*
+2. **Decoding.** Given a HMM $M$ and a sequence $x$, find the *hidden state sequence* $\pi$ that maximises $\mathrm{Pr}(x, \pi\vert M)$ (i.e. $\mathrm{argmax}_\pi \mathrm{Pr}(x, \pi \vert M)$)—solved by *Viterbi algorithm*
+3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x\vert \theta)$—solved by *Backward algorithm*/*Baum-Welch learning*
 
 where model $M$ is defined by architecture – alphabet $\Sigma$, states $S$ (or $Q$) – and parameters $\theta = (E, T)$ ($T$ can also be denoted as $A$ or $a_{ij}$, $E$ can be denoted as $e_i[\cdot]$).
 
@@ -54,14 +54,14 @@ $$\mathrm{Pr}(\pi) = \prod_{i=1}^n T_{\pi_{i-1}\pi_i}$$
 
 **Input:** string (or *sequence*) $x = x_1\dots x_n$ emitted by an HMM $(\Sigma, S, T, E)$ and a hidden path $\pi = \pi_1\dots \pi_n$.
 
-**Ouput:** conditional probability $\mathrm{Pr}(x|\pi)$ that $x$ will be emitted given that the HMM follows hidden path $\pi$.
+**Ouput:** conditional probability $\mathrm{Pr}(x\vert \pi)$ that $x$ will be emitted given that the HMM follows hidden path $\pi$.
 
-$$\mathrm{Pr}(x|\pi) = \prod_{i=1}^n \mathrm{Pr}(x_i | \pi_i) = \prod_{i=1}^n E_{\pi_i x_i}$$
+$$\mathrm{Pr}(x\vert \pi) = \prod_{i=1}^n \mathrm{Pr}(x_i \vert  \pi_i) = \prod_{i=1}^n E_{\pi_i x_i}$$
 
 
 We also have
 
-$$\mathrm{Pr}(x, \pi) = \mathrm{Pr}(x|\pi)\mathrm{Pr}(\pi) = \prod_{i=1}^n \mathrm{Pr}(x_|\pi_i)\mathrm{Pr}(\pi_i) = \prod_{i=1}^n T_{\pi_{i-1} \pi_i} E_{\pi_i x_i}$$
+$$\mathrm{Pr}(x, \pi) = \mathrm{Pr}(x\vert \pi)\mathrm{Pr}(\pi) = \prod_{i=1}^n \mathrm{Pr}(x_\vert \pi_i)\mathrm{Pr}(\pi_i) = \prod_{i=1}^n T_{\pi_{i-1} \pi_i} E_{\pi_i x_i}$$
 
 
 ## Decoding problem
@@ -103,10 +103,10 @@ traceback:
 
 ### Complexity
 
-Runtime is linear in terms of the *number of edges in the Viterbi graph*, which is $O(|S|^2 n)$ where $n$ is the number of emitted symbols (length of string).
+Runtime is linear in terms of the *number of edges in the Viterbi graph*, which is $O(\vert S\vert ^2 n)$ where $n$ is the number of emitted symbols (length of string).
 
-* Time: $O(|S|^2 n)$
-* Space: $O(|S|n)$
+* Time: $O(\vert S\vert ^2 n)$
+* Space: $O(\vert S\vert n)$
 
 
 ## Evaluation problem (outcome likelihood)
@@ -128,8 +128,8 @@ s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
 
 ### Complexity
 
-* Time: $O(|S|^2n)$
-* Space: $O(|S|n)$
+* Time: $O(\vert S\vert ^2n)$
+* Space: $O(\vert S\vert n)$
 
 ## Learning problem
 
@@ -137,13 +137,13 @@ s[k,i] = sum(s[l, i-1] * weight[(l, i-1), (k, i)])
 
 **Input:** an HMM $M$, sequence of observed states $x$.
 
-**Output:** $\mathrm{Pr}(\pi_i =k | x)$
+**Output:** $\mathrm{Pr}(\pi_i =k \vert  x)$
 
 ### Method (Backward algorithm)
 
-$$\mathrm{Pr}(\pi_i=k|x) = \mathrm{Pr}(x_1\dots x_i, \pi=k, x_{i+1}\dots x_N)$$
-$$ ... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k) \mathrm{Pr}(x_{i+1} \dots x_N | x_1\dots x_i, \pi_i = k)$$
-$$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N| \pi_i = k)$$
+$$\mathrm{Pr}(\pi_i=k\vert x) = \mathrm{Pr}(x_1\dots x_i, \pi=k, x_{i+1}\dots x_N)$$
+$$ ... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k) \mathrm{Pr}(x_{i+1} \dots x_N \vert  x_1\dots x_i, \pi_i = k)$$
+$$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N\vert  \pi_i = k)$$
 
 *useful technique:* rescale at each position by multiplying by a constant
 
