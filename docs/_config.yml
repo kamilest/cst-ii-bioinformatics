@@ -10,4 +10,4 @@ url:              'https://kamilest.github.io'
 baseurl:          '/cst-ii-bioinformatics'
 
 remote_theme: pmarsceill/just-the-docs
-color_scheme: "dark"
+markdown: kramdown
