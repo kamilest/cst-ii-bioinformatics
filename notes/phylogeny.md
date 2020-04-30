@@ -136,7 +136,7 @@ Weaknesses of UPGMA:
 ### Method
 Works by the same principle as Kruskal's MST algorithm (forming clusters between the closest neighbours)
 1. Form a cluster for each present day species, each containing a single leaf
-2. Find two closest clusters $C_1$ and $C_2$ according to *average distance*: $D_{\text{avg}}(C_1, C_2) = \frac{\sum_{i \in C_1, j\in C_2}D_{ij}}{|C_1||C_2|}$
+2. Find two closest clusters $C_1$ and $C_2$ according to *average distance*: $D_{\text{avg}}(C_1, C_2) = \frac{\sum_{i \in C_1, j\in C_2}D_{ij}}{\vert C_1\vert \vert C_2\vert }$
 3. Merge $C_1$ and $C_2$ into a single cluster $C$.
 4. Form a new node for $C$ and connect to $C_1$ and $C_2$ by an edge. Set age of $C$ as $D_{\text{avg}}(C_1, C_2)/2$
 5. Update distance matrix by computing the average distance between each pair of clusters (replace $C_1$ and $C_2$ in the distance matrix by the new merged cluster with new distances).
