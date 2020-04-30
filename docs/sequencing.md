@@ -1,3 +1,10 @@
+---
+layout: default
+title: Phylogeny
+nav_order: 4
+---
+
+
 # Genome sequencing
 * modern sequencing machines cannot read entire genome one nucleotide at a time
 * generate short *reads*

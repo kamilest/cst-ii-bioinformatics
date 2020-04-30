@@ -4,8 +4,8 @@
 * using a reference genome to help reconstruct the new sample genome faster by recognising the parts matching the reference rather than assembling from scratch
 * *read mapping*: determining where each read has high similarity to the reference genome
 * *fitting alignment*: aligning each pattern to the best substring in genome
-  * runtime $O(|\text{Pattern}| \times |\text{Genome}|)$ for a single pattern
-  * $O(|\text{Patterns}| \times |\text{Genome}|)$ for a collection of patterns
+  * runtime $O(\vert \text{Pattern}\vert  \times \vert \text{Genome}\vert )$ for a single pattern
+  * $O(\vert \text{Patterns}\vert  \times \vert \text{Genome}\vert )$ for a collection of patterns
 
 ## Single pattern matching problem
 *Find where reads match the reference genome exactly.*
@@ -20,8 +20,8 @@
 **Output:** all positions in *Genome* where a string from *Patterns* appears as a substring
 
 #### Brute force approach complexity
-  * $O(|\text{Pattern}| \times |\text{Genome}|)$ for a single pattern
-  * $O(|\text{Patterns}| \times |\text{Genome}|)$ for a collection of patterns
+  * $O(\vert \text{Pattern}\vert  \times \vert \text{Genome}\vert )$ for a single pattern
+  * $O(\vert \text{Patterns}\vert  \times \vert \text{Genome}\vert )$ for a collection of patterns
 
 ## Using tries for pattern matching
 
