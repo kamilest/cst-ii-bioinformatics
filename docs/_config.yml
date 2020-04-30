@@ -34,4 +34,4 @@ destination:      ./_site
 incremental:      false
 regenerate:       true
 
-theme: just-the-docs
+remote_theme: pmarsceill/just-the-docs
