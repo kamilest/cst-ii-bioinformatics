@@ -7,63 +7,9 @@ has_children: true
 
 # Alignment lectures
 
-## Longest common subsequence
 
-**Given**: Two strings.
 
-**Return**: A longest common subsequence of these strings.
 
-### Method
-
-Dynamic programming algorithm:
-
-1. Initialise scoring matrix to 0
-2. At each step allow only insertions or deletions (no mismatches)
-3. Positive score for matches, no score for indels
-4. Aim for the maximal number of symbols for strings `v` and `w` such that `v_t = w_t`
-
-Edit distance over Hamming distance–DP method of solving through edit graphs.
-
-#### Overlap detection variant
-
-* Can have unlimited number of gaps at the beginning and the end of the sequence.
-* Initialise first row and column to 0.
-
-### Complexity
-* Time: $O(mn)$ 
-* Space: $O(mn)$
-
-for sequences of length $n$ and $m$.
-
-## Global alignment problem
-*Find the highest-scoring alignment between two strings using a scoring matrix.*
-
-**Given**: Two amino acid strings and a scoring matrix.
-
-**Return**: The maximum alignment score of these strings followed by an alignment achieving this maximum score. 
-
-### Method (Needleman-Wunsch algorithm)
-
-[Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA5E/ba5e.py)
-
-1. Initialise first row and column to the `(cells to source) * penalty`
-2. Dynamic programming: highest score between indel and match/mismatch
-```
-score = scoring_matrix[(v[i-1], w[j-1])]
-s[i, j] = max(s[i-1, j] - indel_penalty,
-              s[i, j-1] - indel_penalty
-              s[i-1, j-1] + score)
-```
-3. Backtrack as appropriate
-  * to the left (if insertion in column string)
-  * up (if insertion in row string)
-  * diagonal (match/mismatch) 
-4. Going back through the coordinates from sink to source returns the original path.
-
-### Complexity
-* Space: $O(mn)$
-* Time: $O(mn)$
-* Backtrace: $O(m+n)$
 
 
 ## Local alignment problem
