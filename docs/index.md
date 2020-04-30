@@ -19,6 +19,4 @@ This site contains the notes for the Computer Science Tripos Part II Bioinformat
 * Nussinov RNA folding algorithm
 
 Sample math eqn
-$$
-e^{i\pi} + 1 = 0
-$$
+$$e^{i\pi} + 1 = 0$$
