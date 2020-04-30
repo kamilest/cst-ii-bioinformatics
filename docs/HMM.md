@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Hidden Markov models
-nav_order: 5
+nav_order: 0
 ---
-<!-- 
+
 # Hidden Markov Models
 - [Hidden Markov Models](#hidden-markov-models)
   - [Three problems of HMMs](#three-problems-of-hmms)
@@ -155,4 +155,4 @@ Start with estimators for parameters:
 
 $$T'_{lk} = \frac{T_{lk}}{\sum_j T_{lj}}$$
 
-$$E'_{kb} = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}$$ -->
+$$E'_{kb} = \frac{E_{kb}}{\sum_{c\in \Sigma} E_{kc}}$$
