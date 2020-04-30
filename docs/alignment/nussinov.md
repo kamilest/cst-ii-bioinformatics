@@ -13,7 +13,7 @@ nav_order: 6
      1. $F(i, j) = s(x_i, x_j) + F(i+1, j-1)$
      2. score of folding of $x_i$ and $x_j$ as substring from $i+1$ to $j-1$ folds optimally
   2. $x_i$ is not paired with $x_j$:
-     1. $F(i, j) = \mathrm{max}\{k: i \leq k < j\}\ F(i, k) + F(k+1, j)$
+     1. $F(i, j) = \mathrm{max}_{k: i \leq k < j}\ F(i, k) + F(k+1, j)$
 * Final $F(i, j)$ is the maximum of previous two cases
 * Dot-bracket representation for *pseudoknot-free* structure; extended pseudoknot representation
 * Secondary structure:
