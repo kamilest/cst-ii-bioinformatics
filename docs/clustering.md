@@ -4,7 +4,7 @@ title: Clustering
 nav_order: 2
 ---
 
-{: toc}
+{:toc}
 
 # Clustering
 
