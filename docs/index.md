@@ -4,6 +4,7 @@
 
 layout: home
 mathjax: true
+
 ---
 
 This site contains the notes for the Computer Science Tripos Part II Bioinformatics course at University of Cambridge.
@@ -19,5 +20,3 @@ This site contains the notes for the Computer Science Tripos Part II Bioinformat
 * Alignment in linear space problem (Hirschberg)
 * Nussinov RNA folding algorithm
 
-Sample math eqn
-$$e^{i\pi} + 1 = 0$$
