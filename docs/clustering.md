@@ -4,7 +4,25 @@ title: Clustering
 nav_order: 2
 ---
 
-{:toc}
+- [Clustering](#clustering)
+  - [Clustering problem](#clustering-problem)
+  - [$k$-center clustering problem](#math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-center-clustering-problem)
+    - [Complexity](#complexity)
+  - [$k$-center clustering heuristic](#math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-center-clustering-heuristic)
+  - [$k$-means clustering problem](#math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-means-clustering-problem)
+    - [Center of gravity theorem](#center-of-gravity-theorem)
+    - [Lloyd algorithm ($k$-means clustering)](#lloyd-algorithm-math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-means-clustering)
+    - [Complexity](#complexity-1)
+  - [Soft $k$-means clustering](#soft-math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-means-clustering)
+    - [Expectation maximisation](#expectation-maximisation)
+    - [Complexity](#complexity-2)
+  - [Hierarchical clustering](#hierarchical-clustering)
+    - [Complexity](#complexity-3)
+  - [Markov clustering algorithm (MCL)](#markov-clustering-algorithm-mcl)
+    - [Method](#method)
+    - [Complexity](#complexity-4)
+  - [Stochastic neighbour embedding (t-SNE)](#stochastic-neighbour-embedding-t-sne)
+    - [Method (key points)](#method-key-points)
 
 # Clustering
 
