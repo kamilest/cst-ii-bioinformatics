@@ -6,14 +6,14 @@ nav_order: 2
 
 - [Clustering](#clustering)
   - [Clustering problem](#clustering-problem)
-  - [$k$-center clustering problem](#math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-center-clustering-problem)
+  - [\(k\)-center clustering problem](#k-center-clustering-problem)
     - [Complexity](#complexity)
-  - [$k$-center clustering heuristic](#math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-center-clustering-heuristic)
-  - [$k$-means clustering problem](#math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-means-clustering-problem)
+  - [\(k\)-center clustering heuristic](#k-center-clustering-heuristic)
+  - [\(k\)-means clustering problem](#k-means-clustering-problem)
     - [Center of gravity theorem](#center-of-gravity-theorem)
-    - [Lloyd algorithm ($k$-means clustering)](#lloyd-algorithm-math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-means-clustering)
+    - [Lloyd algorithm (\(k\)-means clustering)](#lloyd-algorithm-k-means-clustering)
     - [Complexity](#complexity-1)
-  - [Soft $k$-means clustering](#soft-math-xmlns%22httpwwww3org1998mathmathml%22semanticsmrowmikmimrowannotation-encoding%22applicationx-tex%22kannotationsemanticsmathk-means-clustering)
+  - [Soft \(k\)-means clustering](#soft-k-means-clustering)
     - [Expectation maximisation](#expectation-maximisation)
     - [Complexity](#complexity-2)
   - [Hierarchical clustering](#hierarchical-clustering)
@@ -49,7 +49,7 @@ $$d(\text{DataPoint}, \text{Centers}) = \min_{x \in \text{Centers}} d(\text{Data
 
 $$\text{MaxDistance}(\text{Data}, \text{Centers}) = \max_{\text{DataPoint} \in \text{Data}} d(\text{DataPoint}, \text{Centers})$$
 
-## $k$-center clustering problem
+## \(k\)-center clustering problem
 
 *Given a set of points $\text{Data}$, find $k$ centers minimising $\text{MaxDistance}(\text{Data}, \text{Centers})$*
 
@@ -61,7 +61,7 @@ $$\text{MaxDistance}(\text{Data}, \text{Centers}) = \max_{\text{DataPoint} \in \
 
 *Intractable.*
 
-## $k$-center clustering heuristic
+## \(k\)-center clustering heuristic
 **Farthest first traversal**
 
 1. set *Centers* to the set consisting of single *DataPoint* from *data*
@@ -73,7 +73,7 @@ Maximal distance does ot do well in extreme cases when there are outliers; we ar
 * minimise *squared error distortion* instead of maximal distance
 * so that all points contribute to it rather than single outlier influences the entire result
 
-## $k$-means clustering problem
+## \(k\)-means clustering problem
 
 **Input:** $\text{Data}, k$
 
@@ -85,7 +85,7 @@ Maximal distance does ot do well in extreme cases when there are outliers; we ar
 
 $$\text{Centroid}(\text{Data}) = \sum_{\text{DataPoint}\in\text{Data}} \frac{\text{DataPoint}}{|\text{Data}|}$$
 
-### Lloyd algorithm ($k$-means clustering)
+### Lloyd algorithm (\(k\)-means clustering)
 
 1. Select $k$ arbitrary data points as *Centers* and perform:
 2. *Centers to clusters.* Assign data point to cluster corresponding to nearest center (ties broken arbitrarily).
@@ -101,7 +101,7 @@ Exact solution for $k$-means clustering: *NP-hard* for $k>1$.
 * $O(nk)$ for deriving $k$ new center approximations
 * for $I$ iterations in $d$ dimensions, $O(nkdI)$; $I \sim k$
 
-## Soft $k$-means clustering
+## Soft \(k\)-means clustering
 
 * Lloyd algorithm assigns points to strictly one cluster
 * in soft clustering assign probabilities for each point to be in a certain cluster

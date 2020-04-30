@@ -22,7 +22,7 @@ Dynamic programming algorithm:
 
 Edit distance over Hamming distance–DP method of solving through edit graphs.
 
-#### Overlap detection variant
+### Overlap detection variant
 
 * Can have unlimited number of gaps at the beginning and the end of the sequence.
 * Initialise first row and column to 0.
