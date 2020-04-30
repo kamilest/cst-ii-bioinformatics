@@ -124,8 +124,8 @@ Alternatively,
 
 ### Complexity
 
-* Time $O(N^2M)$ for $N > M$
-* Space $O(NM)$
+* Time $O(nm)$ for $n > m$
+* Space $O(nm)$
 
 ## Banded dynamic programming
 Assume strings are already similar and have few insertions/deletions, updating scorings within some distance from the diagonal ($|i-j| < k(N)$)
