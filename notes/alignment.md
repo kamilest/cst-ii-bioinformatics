@@ -112,10 +112,11 @@ The main change from the Needleman-Wunsch is that the *score cannot be negative*
 * Lower and upper level penalties are $\varepsilon$ as they account for extensions
 * Switching from middle level to lower/upper costs $\sigma$ gap opening penalty
 * Going back from gap extension levels back to the same node in middle level does not cost anything
-  * middle level updates to max of previous middle + score/same node in lower/same node in uppter
-  * lower and uppter update to max of lower/upper + $\varepsilon$/middle level + $\sigma$
+  * middle level updates to max of previous middle + score/same node in lower/same node in upper
+  * lower updates to max of lower + $\varepsilon$ and middle level + $\sigma$
+  * upper updates to max of upper + $\varepsilon$ and middle level + $\sigma$
 
-### Simulating affine gaps by long edges
+Alternatively,
 
 * $F$ scoring matrix would compute matches/gap opening/gap close (score from $G$ plus score of match)
 * $G$ scoring matrix would compute gap extensions

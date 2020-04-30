@@ -6,9 +6,6 @@ email:            ks830@cam.ac.uk
 description: >
   Computer Science Tripos Part II Bioinformatics notes.
 
-version:          1.0
-gitbook_version:  3.2.3
-
 url:              'https://kamilest.github.io'
 baseurl:          '/cst-ii-bioinformatics'
 rss:              RSS
@@ -37,5 +34,4 @@ destination:      ./_site
 incremental:      false
 regenerate:       true
 
-plugins:
-  - jemoji
+theme: just-the-docs
