@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Hidden Markov models
+title: Matching
 nav_order: 5
 ---
 
