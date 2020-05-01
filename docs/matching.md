@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Matching
+title: Genome pattern matching
 nav_order: 5
 ---
 
