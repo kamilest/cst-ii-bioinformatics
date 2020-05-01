@@ -1,3 +1,9 @@
+---
+layout: default
+title: Hidden Markov models
+nav_order: 5
+---
+
 # Genomics pattern matching
 
 * mapping low-divergent sequences against a large reference genome

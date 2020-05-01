@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Hidden Markov models
-nav_order: 5
+nav_order: 6
 ---
 
 # Hidden Markov Models
