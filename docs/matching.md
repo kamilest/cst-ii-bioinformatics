@@ -81,8 +81,8 @@ def construct_trie(patterns):
 
 ### Complexity (prefix trie matching)
 
-* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert $
-* Space: $O(\vert \text{Patterns}\vert $
+* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$
+* Space: $O(\vert \text{Patterns}\vert)$
 
 ## Suffix tree compression
 
