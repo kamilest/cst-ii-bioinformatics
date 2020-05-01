@@ -81,8 +81,8 @@ def construct_trie(patterns):
 
 ### Complexity (prefix trie matching)
 
-* Time: $O(|\text{Patterns}| + |\text{Genome}| \times |\text{Pattern}|$
-* Space: $O(|\text{Patterns}|$
+* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert $
+* Space: $O(\vert \text{Patterns}\vert $
 
 ## Suffix tree compression
 
@@ -96,7 +96,7 @@ Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from huma
    * length of the substring until the next branching point
 
 ### Complexity (suffix tries)
-* Space: $O(|\text{Genome}|$ (but this is still impractical because of huge constant factors which make the genome not fit into RAM).
+* Space: $O(\vert \text{Genome}\vert $ (but this is still impractical because of huge constant factors which make the genome not fit into RAM).
 
 
 ## Burrows-Wheeler transform
