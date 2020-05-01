@@ -120,3 +120,26 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 3. Look up the LastColumn of the matched suffixes to get $(n-1)$-th symbol
 4. Look up which of those match to $(n-1)$-th symbol of the Patten
 5. Repeat
+
+
+## Multiple approximate pattern matching problem
+
+*Find all approximate occurrences of a collection of patterns in a text.*
+
+**Input:** a string `Text`, a collection of shorter strings `Patterns`, integer *d*.
+
+**Output:** all starting positions in `Text` where a string from `Patterns` appears as a substring with at most *d* mismatches.
+
+### Method 
+
+1. *Seeding*: if at most $d$ mismatches are permitted and the `Text` is split into $d+1$ parts, then by pigeonhole principle at least one part will be matching completely
+2. Sample the slices and see if there is one perfect slice match (seed detection).
+3. Extend matching seed in both directions to verify further if `Pattern` occurs with at most $d$ mismatches (seed extension).
+
+## BLAST: comparing a sequence against a database
+
+Basic local alignment search tool.
+
+* looks for similarities between proteins
+* tolerant to extreme mutations of particular amino acids (looks for similarities in overall structure)
+* very fast and works at large scale (compares against all proteins in the database)
