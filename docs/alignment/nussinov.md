@@ -31,6 +31,22 @@ nav_order: 6
   * $F(i+1, j-1) + s(i, j)$ where $s(i, j)$ is indicator of complementary base pairs
   * $\mathrm{max} \{k: i < k < j\}\ F(i, k) + F(k+1, j)$
 
+### Pseudocode
+```
+for i in range(n-1):
+  s[i,i] = 0
+  s[i+1,i] = 0
+
+s[n,n] = 0
+for k in range(n):
+  for i in range(n-k):
+    j = i + k
+    s[i,j] = np.amax([s[i+1,j], 
+                      s[i,j-1], 
+                      s[i+1,j-1] + score[v[i],v[j]],
+                      max_i<k<j(s[i,k] + s[k+1,j])])
+```
+
 ### Complexity
 
 * $O(n^2)$ terms
