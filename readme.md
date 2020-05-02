@@ -18,6 +18,6 @@ Affine gap penalties| [BA5J](http://rosalind.info/problems/ba5j/)| [Implementati
 Nussinov RNA folding | — | [Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/nussinov/nussinov.py)
 
 --------------
-[1] *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them. [↩](#a1)
+[1] *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them.
 
-[2] Compeau, P. & Pevzner, P.A. (2015). *Bioinformatics algorithms: an active learning approach*. Active Learning Publishers. [↩](#a2)
+[2] Compeau, P. & Pevzner, P.A. (2015). *Bioinformatics algorithms: an active learning approach*. Active Learning Publishers.
