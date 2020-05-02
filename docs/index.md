@@ -1,7 +1,7 @@
 This site contains the notes for the Computer Science Tripos Part II Bioinformatics course at University of Cambridge.
 
 ## Comparing DNA Sequences
-| Title | Rosalind | Implementation
+| Title | Rosalind | Implementation |
 |:--|:--|:--|
 Longest common subsequence | [BA5C](http://rosalind.info/problems/ba5c/)| [Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA5C/ba5c.py)
 Global alignment problem | [BA5E](http://rosalind.info/problems/ba5e/)|[Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA5E/ba5e.py)
