@@ -1,7 +1,7 @@
 import numpy as np
 
 def global_alignment(v, w, scoring_matrix, indel_penalty):
-    s = np.zeros((len(v)+1, len(w)+1))
+    s = np.zeros((len(v)+1, len(w)+1), dtype=np.int)
     backtrack = {}
 
     # Initialise first row and column
@@ -31,7 +31,8 @@ def global_alignment(v, w, scoring_matrix, indel_penalty):
                 backtrack[(i, j)] = (i-1, j)
             elif s[i, j] == s[i, j-1] - indel_penalty:
                 backtrack[(i, j)] = (i, j-1)
-                
+
+    print(s)            
     score = s[len(v), len(w)]
 
     # Backtrack to find alignments
@@ -54,7 +55,7 @@ def global_alignment(v, w, scoring_matrix, indel_penalty):
     return (score, v_aligned, w_aligned)
 
 # Parse the input
-f = open('rosalind_ba5e.txt', 'r')
+f = open('ba5e_small.txt', 'r')
 v = f.readline().strip()
 w = f.readline().strip()
 f.close()
