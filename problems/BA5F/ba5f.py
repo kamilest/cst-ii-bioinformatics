@@ -1,7 +1,7 @@
 import numpy as np
 
 def local_alignment(v, w, scoring_matrix, indel_penalty):
-    s = np.zeros((len(v)+1, len(w)+1))
+    s = np.zeros((len(v)+1, len(w)+1), dtype=np.int)
     backtrack = {}
 
     # Initialise backtrack (scores are already 0)
@@ -27,7 +27,8 @@ def local_alignment(v, w, scoring_matrix, indel_penalty):
             elif s[i, j] == s[i, j-1] - indel_penalty:
                 backtrack[(i, j)] = (i, j-1)
 
-                
+    print(s)
+
     # Find optimal score and one of the optimal coords.
     score_opt = np.amax(s)
     coords_opt = np.where(s == score_opt)
@@ -55,7 +56,7 @@ def local_alignment(v, w, scoring_matrix, indel_penalty):
     return (int(score_opt), v_aligned, w_aligned)
 
 # Parse the input
-f = open('rosalind_ba5f.txt', 'r')
+f = open('ba5f.txt', 'r')
 v = f.readline().strip()
 w = f.readline().strip()
 f.close()
