@@ -4,7 +4,7 @@ def longest_common_subsequence(v, w):
     v_length = len(v)
     w_length = len(w)
 
-    s = np.zeros((v_length+1, w_length+1))
+    s = np.zeros((v_length+1, w_length+1), dtype=np.int)
     backtrack = {}
     
     # Dynamic programming
@@ -24,7 +24,8 @@ def longest_common_subsequence(v, w):
                 backtrack[(i, j)] = (i, j-1)
             elif s[i, j] == s[i-1, j-1]+1 and v[i-1] == w[j-1]:
                 backtrack[(i, j)] = (i-1, j-1)
-
+    
+    print(s)
     return backtrack
 
 def get_lcs(backtrack, v, w):
@@ -41,7 +42,7 @@ def get_lcs(backtrack, v, w):
 
     return out
 
-f = open("rosalind_ba5c.txt", "r")
+f = open("sample.txt", "r")
 v = f.readline()
 w = f.readline()
 
