@@ -162,11 +162,11 @@ where $\mathrm{TotalDistance}_D(i)$ is the sum of distances from $i$ to all othe
 
 ### Neighbour-joining theorem
 
-If $D$ is *additive*, then the smallest element of $D^*$ corresponds to neighbouring leaves in $\mathrm{Tree}(D)$.
+If $D$ is *additive*, then the smallest element of $D^{*}$ corresponds to neighbouring leaves in $\mathrm{Tree}(D)$.
 
 ### Method
-1. Construct neighbour-joining matrix $D^*$ from $D$.
-2. Find a minimum element $D^{*}_{ij}$ of $D^{*}$.
+1. Construct neighbour-joining matrix \(D^{*}\) from $D$.
+2. Find a minimum element \(D_{ij}^{*}\) of \(D^{*}\).
 3. Compute 
    $$\Delta_{ij} = \frac{\mathrm{TotalDistance}_D(i) - \mathrm{TotalDistance}_D(j)}{n-2}$$
 4. Set $\mathrm{LimbLength}(i)=\frac{D_{ij} +\Delta_{ij}}{2}$ and $\mathrm{LimbLength}(j)=\frac{D_{ij}-\Delta_{ij}}{2}$.
