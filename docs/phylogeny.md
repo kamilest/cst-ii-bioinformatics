@@ -24,7 +24,7 @@ nav_order: 3
     - [Complexity](#complexity-2)
   - [Small parsimony](#small-parsimony)
     - [Character based reconstruction](#character-based-reconstruction)
-    - [Method (Sankoff parsimony)](#method-sankoff-parsimony)
+    - [Method (Sankoff parsimony; Implementation)](#method-sankoff-parsimony-implementation)
     - [Complexity](#complexity-3)
   - [Small parsimony in an unrooted tree](#small-parsimony-in-an-unrooted-tree)
   - [Large parsimony](#large-parsimony)
@@ -198,7 +198,8 @@ Neighbour-joining on a set of $n$ taxa requires $n-3$ iterations.
 
 **Parsimony score.** Sum of *Hamming* distances along each edge in the tree where the leaves are genetic sequences of current species.
 
-### Method (Sankoff parsimony)
+### Method (Sankoff parsimony; [Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA7F/ba7f.py))
+
 Could think of this as symbol-wise or (vectorised to) the whole string at once.
 
 Dynamic programming algorithm
