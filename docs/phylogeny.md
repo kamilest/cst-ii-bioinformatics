@@ -20,7 +20,7 @@ nav_order: 3
   - [Neighbour-joining](#neighbour-joining)
     - [Definitions](#definitions)
     - [Neighbour-joining theorem](#neighbour-joining-theorem)
-    - [Method Implementation](#method-implementation)
+    - [Method (Implementation)](#method-implementation)
     - [Complexity](#complexity-2)
   - [Small parsimony](#small-parsimony)
     - [Character based reconstruction](#character-based-reconstruction)
@@ -164,7 +164,7 @@ where $\mathrm{TotalDistance}_D(i)$ is the sum of distances from $i$ to all othe
 
 If $D$ is *additive*, then the smallest element of $D^{*}$ corresponds to neighbouring leaves in $\mathrm{Tree}(D)$.
 
-### Method [Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA7E/ba7e.py)
+### Method ([Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA7E/ba7e.py))
 1. Construct neighbour-joining matrix $D^*$ from $D$.
 2. Find a minimum element $D_{ij}^\*$ of $D^\*$.
 3. Compute 
