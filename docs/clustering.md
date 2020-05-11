@@ -115,9 +115,9 @@ Instead of assigning a point to one cluster, assign *responsibilities* of each p
 
 * *E-step.* From the arbitrary parameters (centers) compute the (hidden) *responsibility matrix*–how much does each point depend on a particular center point.
   * compute *responsibilities* by borrowing the laws from statistical mechanics
-  \[\text{Force}_{ij} = e^{-\beta \cdot d(\text{Data}_j, \text{Center}_i)}\]
+  $$\text{Force}_{ij} = e^{-\beta \cdot d(\text{Data}_j, \text{Center}_i)}$$
 
-  \[\text{HiddenMatrix}_{ij} = \frac{\text{Force}_{ij}}{\sum_j \text{Force}_{ij}}\]
+  $$\text{HiddenMatrix}_{ij} = \frac{\text{Force}_{ij}}{\sum_j \text{Force}_{ij}}$$
   * *stiffness* parameter $\beta$ determines the flexibility of each datapoint to be between the two clusters; 
     * as $\beta \rightarrow \infty$ approaching hard $k$-means
     * as $\beta = 0$, point uniformly belongs to every cluster
