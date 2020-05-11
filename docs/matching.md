@@ -103,13 +103,38 @@ Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from huma
 
 ### Method
 
-1. form a $N\times N$ matrix by cyclically rotating the text to form the rows
-2. lexicographically sort the rotated rows
-3. the last row is the Burrows-Wheeler transform
+1. add an end-of-string character $
+2. form a $N\times N$ matrix by cyclically rotating the text to form the rows
+3. lexicographically sort the rotated rows
+4. the last column is the Burrows-Wheeler transform, return it run-length coded
+5. additionally return index to the original unrotated string in the BWT
 
 ### Complexity (BWT)
 
 * $O(N^2 \log N)$ for a string of length $N$. 
+
+
+## Inverse Burrows-Wheeler transform
+
+### Method
+1. get the last column in run-length coding
+2. compute the first column by sorting the last column (making use of last-to-first property)
+3. starting from the index of the original unrotated string
+
+```
+start from L[I] (set i=I):
+
+while not back at L[I] again:
+  add L[i] to output stack
+  the char c = L[i] is j-th occurrence of c in array L
+  let k be index of j-th occurrence of c in array F (last-to-first)
+  next entry is then L[k] => set i=k
+
+pop the characters from the output stack
+```
+
+### Complexity (inverse-BWT)
+* $O(N \log N)$ for string of length $N$
 
 ### Last-to-first property
 The $i$-th occurrence of a character in last column corresponds to the $i$-th occurrence of that character in the first column
