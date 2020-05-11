@@ -23,6 +23,9 @@ nav_order: 2
     - [Complexity](#complexity-4)
   - [Stochastic neighbour embedding (t-SNE)](#stochastic-neighbour-embedding-t-sne)
     - [Method (key points)](#method-key-points)
+  - [Evaluating results obtained using clustering algorithms](#evaluating-results-obtained-using-clustering-algorithms)
+    - [\(k\)-means](#k-means)
+    - [Markov clustering](#markov-clustering)
 
 # Clustering
 
@@ -196,3 +199,19 @@ TODO more details on t-SNE with equations if needed
 
 * heavy-tailed Student's $t$ mitigates the issue of high-dimensional data where there might be too many points in small low-dimensional space so they cannot be faithfully plotted
 * converts moderate distance points to greater distance, separating non-neighbouring points
+
+
+## Evaluating results obtained using clustering algorithms
+
+### \(k\)-means
+
+* for $k$-means, quality of cluster results could be assessed by ratio of the distance to the nearest cluster and the cluster diameter
+* this is important because $k$ clusters are forced by the algorithm, which makes it possible to create clusters of unrelated nodes
+* could also use clustering cost (?)
+
+$$C = \sum_{n \rightarrow c_i} (X_n - c_i)^2$$
+
+### Markov clustering
+
+* could use clustering entropy, which indicates the stability of clustering and could be compared in clusters obtained from different clustering granularity parameters
+$$S = -\frac{1}{L}\sum_{ij}[M_{ij} \log_2(M_{ij}) + (1-M_{ij}) \log_2(1-M_{ij})]$$
