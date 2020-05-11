@@ -143,7 +143,7 @@ Works by the same principle as Kruskal's MST algorithm (forming clusters between
 6. Iterate until a single cluster contains all species.
 
 ### Complexity
-* Time: $O(n^3)$.
+* Time: $O(n^3)$ (can have $O(n^2)$ if better tracking of minimum distances rather than recomputing every time).
 * Space: $O(n^2)$.
 
 ## Neighbour-joining
