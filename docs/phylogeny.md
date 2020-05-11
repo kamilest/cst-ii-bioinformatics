@@ -230,7 +230,7 @@ $$s_k(v) = \min_{\text{symbols}\ i}[s_i(\text{Daughter}(v)) + \delta_{ik}] + \mi
 
 **Input:** collection of strings of equal length
 
-**Output:** rooted binary tree $T$ that minimises the parsimony score among all possible rooted binary trees with leaves labeled by these strings.
+**Output:** unrooted binary tree $T$ that minimises the parsimony score among all possible rooted binary trees with leaves labeled by these strings.
 
 ### Small vs large parsimony
 
