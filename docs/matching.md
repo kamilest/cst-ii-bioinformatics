@@ -107,6 +107,10 @@ Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from huma
 2. lexicographically sort the rotated rows
 3. the last row is the Burrows-Wheeler transform
 
+### Complexity (BWT)
+
+* $O(N^2 \log N)$ for a string of length $N$. 
+
 ### Last-to-first property
 The $i$-th occurrence of a character in last column corresponds to the $i$-th occurrence of that character in the first column
 
