@@ -159,11 +159,11 @@ E-M algorithm but with matrix multiplication. Multiply the matrix by itself to e
 1. Input undirected graph; *power* parameter $e=2$, *inflation* parameter $r=2$.
 2. Create associated adjacency matrix
 3. Normalise matrix:
-\[M_{pq}' = \frac{M_{pq}}{\sum_i M_{iq}}\]
+$$M_{pq}' = \frac{M_{pq}}{\sum_i M_{iq}}$$
 4. *Expand* by taking $e$-th power of matrix:
-\[M \leftarrow M^e\]
+$$M \leftarrow M^e$$
 5. *Inflate* matrix with inflation parameter $r$:
-\[M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}\]
+$$M_{pq}=\frac{(M_{pq})^r}{\sum_i (M_{iq})^r}$$
 6. Repeat until convergence (in practice 10-100 steps, fewer if sparse matrix).
 
 ![](figs/markov.png)
