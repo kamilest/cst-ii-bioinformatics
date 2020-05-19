@@ -114,7 +114,7 @@ def upgma(dist_matrix, n):
 
     return T_weights
 
-f = open('rosalind_ba7d.txt', 'r')
+f = open('ba7d.txt', 'r')
 n = int(f.readline())
 
 dist_matrix = np.zeros((n, n))
