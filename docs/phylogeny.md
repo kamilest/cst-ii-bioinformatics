@@ -15,12 +15,12 @@ nav_order: 3
     - [Complexity](#complexity)
   - [UPGMA (Unweighted pair group with arithmetic mean)](#upgma-unweighted-pair-group-with-arithmetic-mean)
     - [Description](#description)
-    - [Method](#method-1)
+    - [Method (Implementation)](#method-implementation)
     - [Complexity](#complexity-1)
   - [Neighbour-joining](#neighbour-joining)
     - [Definitions](#definitions)
     - [Neighbour-joining theorem](#neighbour-joining-theorem)
-    - [Method (Implementation)](#method-implementation)
+    - [Method (Implementation)](#method-implementation-1)
     - [Complexity](#complexity-2)
   - [Small parsimony](#small-parsimony)
     - [Character based reconstruction](#character-based-reconstruction)
@@ -133,7 +133,7 @@ Weaknesses of UPGMA:
 * *molecular clock assumption*: implies time is constant for all species (i.e. the current species have the same age from the ancestor); however, certain species evolve much faster
 * typically gives a poor tree
 
-### Method
+### Method ([Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA7D/ba7d.py))
 Works by the same principle as Kruskal's MST algorithm (forming clusters between the closest neighbours)
 1. Form a cluster for each present day species, each containing a single leaf
 2. Find two closest clusters $C_1$ and $C_2$ according to *average distance*: $D_{\text{avg}}(C_1, C_2) = \frac{\sum_{i \in C_1, j\in C_2}D_{ij}}{\vert C_1\vert \vert C_2\vert }$
