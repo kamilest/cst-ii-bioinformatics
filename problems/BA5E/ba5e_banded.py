@@ -1,6 +1,6 @@
 import numpy as np
 
-def global_alignment(v, w, scoring_matrix, indel_penalty):
+def global_alignment(v, w, scoring_matrix, indel_penalty, band_width):
     s = np.zeros((len(v)+1, len(w)+1), dtype=np.int)
     backtrack = {}
 
@@ -15,7 +15,7 @@ def global_alignment(v, w, scoring_matrix, indel_penalty):
 
     # Dynamic programming
     for i in range(1, len(v)+1):
-        for j in range(1, len(w)+1):
+        for j in range(max(1, i-band_width), min(len(w)+1, i+band_width+1)):
             # Going down or right
             s[i, j] = max(s[i-1, j] - indel_penalty, s[i, j-1] - indel_penalty)
 
@@ -74,7 +74,8 @@ f.close()
 
 
 indel_penalty = 1
-(score, v_aligned, w_aligned) = global_alignment(v, w, scoring_matrix, indel_penalty)
+band_width = 3
+(score, v_aligned, w_aligned) = global_alignment(v, w, scoring_matrix, indel_penalty, band_width)
 print(score)
 print(v_aligned)
 print(w_aligned)
