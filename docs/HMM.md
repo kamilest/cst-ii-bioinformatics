@@ -34,7 +34,7 @@ nav_order: 6
 ## Three problems of HMMs
 1. **Evaluation.** Given a HMM $M$ and a sequence $x$, find probability of the *observable sequence* $\mathrm{Pr}(x\vert M)$ over all possible paths (i.e. $\sum_\pi \mathrm{Pr}(x, \pi\vert M)$)—solved by *Forward algorithm*
 2. **Decoding.** Given a HMM $M$ and a sequence $x$, find the *hidden state sequence* $\pi$ that maximises $\mathrm{Pr}(x, \pi\vert M)$ (i.e. $\mathrm{argmax}_\pi \mathrm{Pr}(x, \pi \vert M)$)—solved by *Viterbi algorithm*
-3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x\vert \theta)$—solved by *Backward algorithm*/*Baum-Welch learning*
+3. **Learning.** Given a HMM $M$ with unspecified transition/emission probabilities and a sequence $x$, find parameters $\theta = (E, T)$ that maximise $\mathrm{Pr}(x\vert \theta)$—solved by *Backward algorithm* or (NE) *Baum-Welch learning*
 
 where model $M$ is defined by architecture – alphabet $\Sigma$, states $S$ (or $Q$) – and parameters $\theta = (E, T)$ ($T$ can also be denoted as $A$ or $a_{ij}$, $E$ can be denoted as $e_i[\cdot]$).
 
