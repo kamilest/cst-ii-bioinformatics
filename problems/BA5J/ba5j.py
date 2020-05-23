@@ -1,6 +1,13 @@
 import numpy as np
 
-def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extension_penalty):
+def dna_scoring(a, b, match_score, mismatch_penalty):
+    if a == b:
+        return match_score
+    else:
+        return mismatch_penalty
+
+
+def affine_gap_alignment(v, w, match_score, mismatch_penalty, gap_opening_penalty, gap_extension_penalty, scoring_matrix=None):
     # Diagonal edges of weight Score(vi, wj) representing matches and mismatches
     middle = np.matrix(np.ones((len(v)+1, len(w)+1)) * -np.inf)
     middle[0, 0] = 0
@@ -44,7 +51,11 @@ def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extensio
                 backtrack_upper[(i, j)] = 'upper'
 
             # If match or mismatch
-            score = scoring_matrix[(v[i-1], w[j-1])]
+            if scoring_matrix is not None:
+                score = scoring_matrix[(v[i-1], w[j-1])]
+            else: 
+                score = dna_scoring(v[i-1], w[j-1], match_score, -1 * mismatch_penalty)
+
             middle[i, j] = np.amax([middle[i-1, j-1] + score, \
                 lower[i, j], upper[i, j]])
 
@@ -88,25 +99,46 @@ def affine_gap_alignment(v, w, scoring_matrix, gap_opening_penalty, gap_extensio
     
     return (int(score), v_aligned, w_aligned)
 
+def parse_input_strings():
+    # Parse the input
+    f = open('rosalind_ba5j.txt', 'r')
+    v = f.readline().strip()
+    w = f.readline().strip()
+    f.close()
+    return v, w
 
-# Parse the input
-f = open('rosalind_ba5j.txt', 'r')
-v = f.readline().strip()
-w = f.readline().strip()
-f.close()
+def parse_scoring_matrix():
+    # Parse the scoring matrix
+    f = open('blosum62.txt', 'r')
+    aas = f.readline().split() # amino acid codes
+    scoring_matrix = {}
 
-# Parse the scoring matrix
-f = open('blosum62.txt', 'r')
-aas = f.readline().split() # amino acid codes
-scoring_matrix = {}
+    for i in range(len(aas)):
+        scores_i = f.readline().split()
+        for j in range(len(scores_i)):
+            scoring_matrix[(aas[i], aas[j])] = int(scores_i[j])
+    f.close()
+    
+    return scoring_matrix
 
-for i in range(len(aas)):
-    scores_i = f.readline().split()
-    for j in range(len(scores_i)):
-        scoring_matrix[(aas[i], aas[j])] = int(scores_i[j])
-f.close()
 
-(score, v_aligned, w_aligned) = affine_gap_alignment(v, w, scoring_matrix, 11, 1)
+match_score = 1
+mismatch_penalty = 1
+indel_penalty = 4
+gap_opening_penalty = 11
+gap_extension_penalty=1
+
+assert(match_score >= 0)
+assert(mismatch_penalty >= 0)
+assert(indel_penalty >= 0)
+assert(gap_opening_penalty >= 0)
+assert(gap_extension_penalty >= 0)
+
+v = 'GCACTT'
+w = 'CCCAAT'
+
+(score, v_aligned, w_aligned) = affine_gap_alignment(v, w, match_score, mismatch_penalty, gap_opening_penalty, gap_extension_penalty)
+
 print(score)
 print(v_aligned)
 print(w_aligned)
