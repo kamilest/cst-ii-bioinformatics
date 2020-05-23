@@ -95,6 +95,10 @@ match_score = 1
 mismatch_penalty = 1
 indel_penalty = 4
 
+assert(match_score >= 0)
+assert(mismatch_penalty >= 0)
+assert(indel_penalty >= 0)
+
 v = 'GCACTT'
 w = 'CCCAAT'
 
