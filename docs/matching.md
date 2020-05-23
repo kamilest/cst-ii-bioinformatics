@@ -88,7 +88,7 @@ def construct_trie(patterns):
 ```
 
 ### Complexity
-* Time: $O(\vert \text{Patterns} \vert * n)$ where $n$ is the length of a pattern.
+* Time: $O(\vert \text{Patterns} \vert)$ where $\vert \text{Patterns}\vert)$ is the combined length of all patterns.
 
 
 ## Multiple pattern matching problem
@@ -98,7 +98,7 @@ def construct_trie(patterns):
 
 ### Complexity (brute force)
   * $O(\vert \text{Pattern}\vert  \times \vert \text{Genome}\vert )$ for a single pattern
-  * $O(\vert \text{Patterns}\vert  \times \vert \text{Genome}\vert )$ for a collection of patterns (applying the Single pattern matching algorithm for every pattern)
+  * $O(\vert \text{Patterns}\vert  \times \vert \text{Genome}\vert )$ for a collection of patterns (applying the Single pattern matching algorithm for every pattern); $\vert \text{Patterns}\vert)$ indicates the combined length of all patterns. 
 
 ### Method (prefix trie matching)
 
@@ -107,12 +107,12 @@ def construct_trie(patterns):
 
 ### Complexity (prefix trie matching)
 
-* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$
+* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $|\text{Pattern}|$ indicating the length of the longest pattern.
 * Space: $O(\vert \text{Patterns}\vert)$
 
 ## Suffix tree compression
 
-Attempts to avoid storing the pattern trie in memory (reads/patterns from human genome could be upwards of 1TB)
+A *suffix trie* is a trie formed from all suffixes of a genome (text). *Suffix tries* attempt to avoid storing the *pattern trie* in memory (reads/patterns from human genome could be upwards of 1TB). *Suffix trees* are compressed *suffix tries* (to also fit in memory).
 
 ### Method
 1. Construct a trie out of the *suffixes* of Genome
