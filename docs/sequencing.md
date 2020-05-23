@@ -60,7 +60,7 @@ NP-Complete.
 
 ### De Bruijn graphs
 
-* represent every $k$-mer $s_i, \dots, s_{i + k - 1}$ as an edge between a prefix node ($s_i, \dots, s_{i + k - 2}$) and a suffix node ($s_{i + 1}, \dots, s_{i + k - 1}$), with edge label $s_i, \dots, s_{i + k - 1}$.
+* represent every $k$-mer $s_i, \dots, s_{i + k - 1}$ as an edge between a suffix node ($s_{i + 1}, \dots, s_{i + k - 1}$) and a prefix node ($s_i, \dots, s_{i + k - 2}$), with edge label $s_i, \dots, s_{i + k - 1}$.
 * all nodes with identical labels merged together
 * find the *Eulerian cycle* which can be easily converted to a path.
 
@@ -89,7 +89,7 @@ NP-Complete.
 2. If there are nodes with unused edges, start at that node, use the unexplored edges and extend the previously constructed cycle with a second loop. The new cycle will start at that node which will be visited twice to traverse both of the loops.
 3. Keep going until all edges are used.
 
-Alternatively,
+Alternatively, ()
 1. Form a *Cycle* by randomly walking in balanced graph
 2. While *Cycle* is not Eulerian
    1. select the node *newStart* in *Cycle* with still unexplored outgoing edges
@@ -99,6 +99,9 @@ Alternatively,
 
 ### Complexity
 Time: $O(|E|)$ for $E$ edges if the implementation is efficient.
+
+### Problems
+With the above methods, we can arrive at multiple Eulerian paths, and some of them may not correspond to the k-mer composition of the genome. We may attempt to arrive at a unique reconstruction of the genome by increasing the read length. However, this is not always possible due to limitations of the sequencing machine. A more elegant method is to solve the sequencing problem on a de Bruijn graph constructed from paired k-mers (Below). 
 
 ## Read-pair assembly
 A *paired $k$-mer* is a pair of $k$-mers at a *fixed* distance $d$ apart in the genome.
@@ -120,15 +123,23 @@ A *paired $k$-mer* is a pair of $k$-mers at a *fixed* distance $d$ apart in the 
 * Decreases the number of possibilities for a path—simple unpaired de Bruijn usually gives multiple possible paths so many potential genome assemblies. 
 * Paired de Bruijn narrows the assembly choice down and accounts for the placement of various *repeats* in the genome.
 
+**Problem:** Not every Eulerian path in the paired de Bruijn graph constructed from a (k, d)-mer composition spells out a
+solution of the String Reconstruction from Read-Pairs Problem. To solve this, generate all Eulerian paths and output the path that spells out a string whose paired (k, d)-mer composition is equal to the initial set of (k, d)-mers.
+
 ### Constraints
 Assumptions include:
 
-* *perfect coverage* of genome by reads
-  * breaking reads into shorter $k$-mers which are more likely to cover the entire genome
+* *perfect coverage* of genome by reads 
+  * in reality, only a small fraction of k-mers are captured from the genome, thereby violating the key assumption of de Bruijn graphs.
+  * breaking reads into shorter $k$-mers which are more likely to cover the entire genome.
   * long reads for perfect coverage should contain every possible $k$-mer in the composition which is unlikely
+  * However, Even after read breaking, most assemblies still have gaps in k-mer coverage, causing the de Bruijn graph to have missing edges, and so the search for an Eulerian path fails. In this case, biologists often settle on assembling contigs (long, contiguous segments of the genome) rather than entire chromosomes. For example, a typical bacterial sequencing project may result in about a hundred contigs, ranging in length from a few thousand to a few hundred thousand nucleotides. For most genomes, the order of these contigs along the genome remains unknown. Needless to say, biologists would prefer to have the entire genomic sequence, but the cost of ordering the contigs into a final assembly and closing the gaps using more expensive experimental methods is often prohibitive. We can derive contigs from the de Bruijn graph, by picking out non-branching paths. In practice, biologists have no choice but to break genomes into contigs, even in the case of perfect coverage, since repeats prevent them from being able to infer a unique Eulerian path.
 * *error-free* reads
-  * in reality *bubbles* of de Bruijn graph are possible
-  * bubble detection (could be due to errors or due to actual mutations—learn to distinguish those cases)
+  * in reality, we may perform an incorrect read. Since errors are independent, we may arrive at *bubbles* at the Bruijn graph. More formally, bubbles are short disjoint paths, shorter than some threshold length, that connect the same pair of nodes in the de Bruijn graph. The presence of bubbles clearly affects the correctness of our genome reconstruction.
+  * A single rerror in read results in a bubble of length k in a de Bruijn graph.
+  * Therefore, we may want to perform bubble detection (could be due to errors or due to actual mutations—learn to distinguish those cases). 
 * *known $k$-mer multiplicities*
-  * actually unknown but can estimate relative to the multiplicities of everything else (or average multiplicity)
+  * actually unknown but can estimate relative to the multiplicities of everything else (or average multiplicity). The multiplicity of a k-mer in a genome can often be estimated using its coverage. Indeed, k-mers that appear t times in a genome
+are expected to have approximately t times higher coverage than k-mers that appear just once. Needless to say, coverage varies across the genome, and this condition is often violated. As a result, existing assemblers often assemble repetitive regions in genomes without knowing the exact number of times each k-mer from this region occurs in the
+genome.
 * *distances* between reads within read-pairs are *exact*
