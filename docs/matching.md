@@ -17,6 +17,8 @@ nav_order: 5
   - [Suffix tree compression](#suffix-tree-compression)
     - [Method](#method)
     - [Complexity (suffix tries)](#complexity-suffix-tries)
+  - [Suffix arrays](#suffix-arrays)	
+    - [Method (suffix array construction)](#method-suffix-array-construction)
   - [Burrows-Wheeler transform](#burrows-wheeler-transform)
     - [Method](#method-1)
     - [Complexity (BWT)](#complexity-bwt)
@@ -112,11 +114,7 @@ def construct_trie(patterns):
 
 ## Suffix tree compression
 
-Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from human genome could be upwards of 1TB)
-
-A *suffix trie* is a trie formed from all suffixes of a genome (text). A *suffix tree* is a compressed suffix trie.
-
-*Suffix tries* attempt to avoid storing the *pattern trie* in memory (reads/patterns from human genome could be upwards of 1TB). *Suffix trees* are used to make *suffix tries* smaller (to also fit in memory).l
+A *suffix trie* is a trie formed from all suffixes of a genome (text). *Suffix tries* attempt to avoid storing the *pattern trie* in memory (reads/patterns from human genome could be upwards of 1TB). *Suffix trees* are compressed *suffix tries* (to also fit in memory).
 
 ### Method
 1. Construct a trie out of the *suffixes* of Genome
@@ -129,6 +127,15 @@ A *suffix trie* is a trie formed from all suffixes of a genome (text). A *suffix
 * Time, construction: $O(\vert \text{Genome}\vert)$ using Ukkonen's algorithm. $O(\vert \text{Genome}\vert^2)$ if constructed naively.
 * Time, pattern match: $O(\vert \text{Genome}\vert + \vert \text{Patterns} \vert) $
 * Space: $O(\vert \text{Genome}\vert)$ (but this is still impractical because of huge constant factors which make the genome not fit into RAM).
+
+## Suffix arrays
+
+A memory efficient alternative to suffix trees.	
+
+### Method (suffix array construction)	
+
+1. sort suffixes of `Text` lexicographically	
+2. suffix array is a list of starting positions of the suffixes
 
 
 ## Burrows-Wheeler transform
