@@ -9,6 +9,7 @@ def dna_scoring(a, b, match_score, mismatch_penalty):
     else:
         return mismatch_penalty
 
+
 def local_alignment(v, w, match_score, mismatch_penalty, indel_penalty, scoring_matrix=None):
     s = np.zeros((len(v)+1, len(w)+1), dtype=np.int)
     backtrack = {}
@@ -97,6 +98,10 @@ def parse_scoring_matrix():
 match_score = 1
 mismatch_penalty = 1
 indel_penalty = 4
+
+assert(match_score >= 0)
+assert(mismatch_penalty >= 0)
+assert(indel_penalty >= 0)
 
 v = 'GCACTT'
 w = 'CCCAAT'
