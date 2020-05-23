@@ -20,6 +20,8 @@ nav_order: 5
   - [Burrows-Wheeler transform](#burrows-wheeler-transform)
     - [Method](#method-1)
     - [Complexity (BWT)](#complexity-bwt)
+      - [Explain with an example why a compression algorithm is often needed in genome assembly. [2016P9Q2]](#explain-with-an-example-why-a-compression-algorithm-is-often-needed-in-genome-assembly-2016p9q2)
+      - [Example](#example)
   - [Inverse Burrows-Wheeler transform](#inverse-burrows-wheeler-transform)
     - [Method](#method-2)
     - [Complexity (inverse-BWT)](#complexity-inverse-bwt)
@@ -139,6 +141,14 @@ Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from huma
 
 * $O(N^2 \log N)$ for a string of length $N$. 
 
+#### Explain with an example why a compression algorithm is often needed in genome assembly. [2016P9Q2]
+
+* Current sequencing procedures are characterized by highly parallel operations, much lower cost per base, but they produce millions of reads.
+* The main effort is to reduce the memory requirement for sequence alignment.
+* Transformed text can be better compressed with fast locally-adaptive algorithms, such as run-length-encoding in combination with Huffman coding.  
+  
+#### Example
+* An example is `ACAACG$` and its BWT is `GC$AAAC`.
 
 ## Inverse Burrows-Wheeler transform
 
