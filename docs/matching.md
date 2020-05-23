@@ -17,8 +17,6 @@ nav_order: 5
   - [Suffix tree compression](#suffix-tree-compression)
     - [Method](#method)
     - [Complexity (suffix tries)](#complexity-suffix-tries)
-  - [Suffix arrays](#suffix-arrays)
-    - [Method (suffix array construction)](#method-suffix-array-construction)
   - [Burrows-Wheeler transform](#burrows-wheeler-transform)
     - [Method](#method-1)
     - [Complexity (BWT)](#complexity-bwt)
@@ -36,7 +34,7 @@ nav_order: 5
 
 * mapping low-divergent sequences against a large reference genome
 * using a reference genome to help reconstruct the new sample genome faster by recognising the parts matching the reference rather than assembling from scratch
-* *read mapping*: determining where each read has high similarity to the reference genome
+* *read mapping*: determining where each read has high similarity to the reference genome. This is used to find Single-Nucleotide Polymorphisms (SNP)s.
 * *reference genome*: template based on multiple individual genomes
 * *fitting alignment*: aligning each pattern to the best substring in genome
   * runtime $O(\vert \text{Pattern}\vert  \times \vert \text{Genome}\vert )$ for a single pattern
@@ -109,12 +107,16 @@ def construct_trie(patterns):
 
 ### Complexity (prefix trie matching)
 
-* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $\vert\text{Pattern}\vert$ indicating the length of the longest pattern.
+* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $|\text{Pattern}|$ indicating the length of the longest pattern.
 * Space: $O(\vert \text{Patterns}\vert)$
 
 ## Suffix tree compression
 
-A *suffix trie* is a trie formed from all suffixes of a genome (text). *Suffix tries* attempt to avoid storing the *pattern trie* in memory (reads/patterns from human genome could be upwards of 1TB). *Suffix trees* are compressed *suffix tries* (to also fit in memory).
+Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from human genome could be upwards of 1TB)
+
+A *suffix trie* is a trie formed from all suffixes of a genome (text). A *suffix tree* is a compressed suffix trie.
+
+*Suffix tries* attempt to avoid storing the *pattern trie* in memory (reads/patterns from human genome could be upwards of 1TB). *Suffix trees* are used to make *suffix tries* smaller (to also fit in memory).l
 
 ### Method
 1. Construct a trie out of the *suffixes* of Genome
@@ -123,17 +125,10 @@ A *suffix trie* is a trie formed from all suffixes of a genome (text). *Suffix t
    * store the starting position of the string
    * length of the substring until the next branching point
 
-### Complexity (suffix tries)
-* Space: $O(\vert \text{Genome}\vert $ (but this is still impractical because of huge constant factors which make the genome not fit into RAM).
-
-## Suffix arrays
-
-A memory efficient alternative to suffix trees.
-
-### Method (suffix array construction)
-
-1. sort suffixes of `Text` lexicographically
-2. suffix array is a list of starting positions of the suffixes
+### Complexity (suffix trees)
+* Time, construction: $O(\vert \text{Genome}\vert)$ using Ukkonen's algorithm. $O(\vert \text{Genome}^2\vert)$ if constructed naively.
+* Time, pattern match: $O(\vert \text{Genome}\vert + \vert \text{Patterns} \vert) $
+* Space: $O(\vert \text{Genome}\vert) $(but this is still impractical because of huge constant factors which make the genome not fit into RAM).
 
 
 ## Burrows-Wheeler transform
@@ -167,6 +162,7 @@ A memory efficient alternative to suffix trees.
 3. starting from the index of the original unrotated string
 
 ```
+F = bwt_string.sort()
 start from L[I] (set i=I):
 
 while not back at L[I] again:
@@ -193,7 +189,8 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 2. Match the $n$-th symbol of the Pattern to the FirstColumn (easy by binary search)
 3. Look up the LastColumn of the matched suffixes to get $(n-1)$-th symbol
 4. Look up which of those match to $(n-1)$-th symbol of the Pattern
-5. Repeat
+5. Repeat until we exhaust the pattern or there are no more suffixes matching the pattern.
+6. Use suffix array to return the positions of the matches
 
 
 ## Multiple approximate pattern matching problem
@@ -204,11 +201,21 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 
 **Output:** all starting positions in `Text` where a string from `Patterns` appears as a substring with at most *d* mismatches.
 
-### Method 
+### Method 1 : Seeding
 
 1. *Seeding*: if at most $d$ mismatches are permitted and the `Text` is split into $d+1$ parts, then by pigeonhole principle at least one part will be matching completely
 2. Sample the slices and see if there is one perfect slice match (seed detection).
 3. Extend matching seed in both directions to verify further if `Pattern` occurs with at most $d$ mismatches (seed extension).
+
+### Method 2: Using BWT
+
+1. Set a threshold level d. This is the maximum number of 'mismatches' that we allow our suffixes to have with the pattern at any given moment.
+2. Move backward through the pattern
+3. Match the $n$-th symbol of the Pattern to the FirstColumn (easy by binary search)
+4. Look up the LastColumn of the matched suffixes to get $(n-1)$-th symbol
+5. Look up which of those match to $(n-1)$-th symbol of the Pattern. If this suffix has d mismatches with the pattern, discard this suffix. If not, increase the number of mismatches of this suffix by 1.
+6. Repeat until we exhaust the pattern or there are no more suffixes matching the pattern.
+7. Use suffix array to return the positions of the approximate matches.
 
 ## BLAST: comparing a sequence against a database
 
