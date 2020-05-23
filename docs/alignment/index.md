@@ -223,4 +223,4 @@ Computing alignment with linear memory
 
 ### Limitations 
 
-Identifying pseudoknot and branched loops is difficult, because the same interact with different segments.
+> Identifying pseudoknot and branched loops is difficult, because the same interact with different segments.
