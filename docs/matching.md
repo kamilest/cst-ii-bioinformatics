@@ -107,7 +107,7 @@ def construct_trie(patterns):
 
 ### Complexity (prefix trie matching)
 
-* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $|\text{Pattern}|$ indicating the length of the longest pattern.
+* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $\vert\text{Pattern}\vert$ indicating the length of the longest pattern.
 * Space: $O(\vert \text{Patterns}\vert)$
 
 ## Suffix tree compression
