@@ -112,7 +112,7 @@ def construct_trie(patterns):
 
 ## Suffix tree compression
 
-Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from human genome could be upwards of 1TB)
+Attempts to avoid storing the pattern trie in memory (reads/patterns from human genome could be upwards of 1TB)
 
 ### Method
 1. Construct a trie out of the *suffixes* of Genome
