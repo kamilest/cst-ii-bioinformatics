@@ -1,10 +1,7 @@
 import numpy as np
 
 def dna_scoring(a, b, match_score, mismatch_penalty):
-    if (a == 'A' and b == 'T') \
-            or (a == 'T' and b == 'A') \
-            or (a == 'C' and b == 'G') \
-            or (a == 'G' and b == 'C'):
+    if a == b:
         return match_score
     else:
         return mismatch_penalty
