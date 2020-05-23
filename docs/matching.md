@@ -17,6 +17,8 @@ nav_order: 5
   - [Suffix tree compression](#suffix-tree-compression)
     - [Method](#method)
     - [Complexity (suffix tries)](#complexity-suffix-tries)
+  - [Suffix arrays](#suffix-arrays)
+    - [Method (suffix array construction)](#method-suffix-array-construction)
   - [Burrows-Wheeler transform](#burrows-wheeler-transform)
     - [Method](#method-1)
     - [Complexity (BWT)](#complexity-bwt)
@@ -123,6 +125,15 @@ Attempts to avoid storing the pattern trie in memory (reads/patterns from human 
 
 ### Complexity (suffix tries)
 * Space: $O(\vert \text{Genome}\vert $ (but this is still impractical because of huge constant factors which make the genome not fit into RAM).
+
+## Suffix arrays
+
+A memory efficient alternative to suffix trees.
+
+### Method (suffix array construction)
+
+1. sort suffixes of `Text` lexicographically
+2. suffix array is a list of starting positions of the suffixes
 
 
 ## Burrows-Wheeler transform
