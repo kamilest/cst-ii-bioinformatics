@@ -181,7 +181,7 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 1. Move backward through the pattern
 2. Match the $n$-th symbol of the Pattern to the FirstColumn (easy by binary search)
 3. Look up the LastColumn of the matched suffixes to get $(n-1)$-th symbol
-4. Look up which of those match to $(n-1)$-th symbol of the Patten
+4. Look up which of those match to $(n-1)$-th symbol of the Pattern
 5. Repeat
 
 
