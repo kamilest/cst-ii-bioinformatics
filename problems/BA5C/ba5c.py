@@ -42,9 +42,14 @@ def get_lcs(backtrack, v, w):
 
     return out
 
-f = open("sample.txt", "r")
-v = f.readline()
-w = f.readline()
+def parse_input():
+    f = open("sample.txt", "r")
+    v = f.readline()
+    w = f.readline()
+    return v, w
+
+v = 'GCACTT'
+w = 'CCCAAT'
 
 backtrack = longest_common_subsequence(v, w)
 lcs = get_lcs(backtrack, v, w)
