@@ -4,6 +4,32 @@ title: Genome pattern matching
 nav_order: 5
 ---
 
+- [Genomics pattern matching](#genomics-pattern-matching)
+  - [Single pattern matching problem](#single-pattern-matching-problem)
+  - [Trie data structure](#trie-data-structure)
+    - [Trie construction problem](#trie-construction-problem)
+    - [Method (trie construction problem)](#method-trie-construction-problem)
+    - [Complexity](#complexity)
+  - [Multiple pattern matching problem](#multiple-pattern-matching-problem)
+    - [Complexity (brute force)](#complexity-brute-force)
+    - [Method (prefix trie matching)](#method-prefix-trie-matching)
+    - [Complexity (prefix trie matching)](#complexity-prefix-trie-matching)
+  - [Suffix tree compression](#suffix-tree-compression)
+    - [Method](#method)
+    - [Complexity (suffix tries)](#complexity-suffix-tries)
+  - [Burrows-Wheeler transform](#burrows-wheeler-transform)
+    - [Method](#method-1)
+    - [Complexity (BWT)](#complexity-bwt)
+  - [Inverse Burrows-Wheeler transform](#inverse-burrows-wheeler-transform)
+    - [Method](#method-2)
+    - [Complexity (inverse-BWT)](#complexity-inverse-bwt)
+    - [Last-to-first property](#last-to-first-property)
+  - [Pattern matching with Burrows-Wheeler transform](#pattern-matching-with-burrows-wheeler-transform)
+    - [Method](#method-3)
+  - [Multiple approximate pattern matching problem](#multiple-approximate-pattern-matching-problem)
+    - [Method](#method-4)
+  - [BLAST: comparing a sequence against a database](#blast-comparing-a-sequence-against-a-database)
+
 # Genomics pattern matching
 
 * mapping low-divergent sequences against a large reference genome

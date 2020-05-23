@@ -26,6 +26,7 @@ has_children: true
     - [Complexity](#complexity-5)
   - [Nussinov RNA folding algorithm](#nussinov-rna-folding-algorithm)
     - [Complexity](#complexity-6)
+    - [Limitations](#limitations)
 
 # Alignment lectures
 
@@ -219,3 +220,7 @@ Computing alignment with linear memory
 * each taking $O(n)$ in case of bifurcation
 * Time: $O(n^3)$
 * Space: $O(n^2)$
+
+### Limitations 
+
+Identifying pseudoknot and branched loops is difficult, because the same interact with different segments.
