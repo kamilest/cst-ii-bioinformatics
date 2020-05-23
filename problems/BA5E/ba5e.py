@@ -88,6 +88,7 @@ def parse_input_strings():
     v = f.readline().strip()
     w = f.readline().strip()
     f.close()
+    return v, w
 
 # ALL MUST BE POSITIVE
 match_score = 1
