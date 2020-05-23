@@ -82,16 +82,20 @@ def parse_scoring_matrix():
     f.close()
     return scoring_matrix
 
-# Parse the input
-f = open('ba5e.txt', 'r')
-v = f.readline().strip()
-w = f.readline().strip()
-f.close()
+def parse_input_strings():
+    # Parse the input
+    f = open('ba5e.txt', 'r')
+    v = f.readline().strip()
+    w = f.readline().strip()
+    f.close()
 
 # ALL MUST BE POSITIVE
 match_score = 1
 mismatch_penalty = 1
 indel_penalty = 4
+
+v = 'GCACTT'
+w = 'CCCAAT'
 
 (score, v_aligned, w_aligned) = global_alignment(v, w, match_score, mismatch_penalty, indel_penalty)
 
