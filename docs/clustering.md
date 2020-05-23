@@ -13,6 +13,7 @@ nav_order: 2
     - [Center of gravity theorem](#center-of-gravity-theorem)
     - [Lloyd algorithm (\(k\)-means clustering)](#lloyd-algorithm-k-means-clustering)
     - [Complexity](#complexity-1)
+      - [How can you evaluate the results obtained (number of clusters and their relative position) using the k-means algorithm for clustering? [2013P9Q1]](#how-can-you-evaluate-the-results-obtained-number-of-clusters-and-their-relative-position-using-the-k-means-algorithm-for-clustering-2013p9q1)
   - [Soft \(k\)-means clustering](#soft-k-means-clustering)
     - [Expectation maximisation](#expectation-maximisation)
     - [Complexity](#complexity-2)
@@ -103,6 +104,12 @@ Exact solution for $k$-means clustering: *NP-hard* for $k>1$.
 * $O(nk)$ for assignment of nearest points to centers
 * $O(nk)$ for deriving $k$ new center approximations
 * for $I$ iterations in $d$ dimensions, $O(nkdI)$; $I \sim k$
+
+#### How can you evaluate the results obtained (number of clusters and their relative position) using the k-means algorithm for clustering? [2013P9Q1]
+
+* The quality of cluster could be assessed by ratio of distance to nearest cluster and cluster diameter. 
+* A cluster can be formed even when there is no similarity between clustered patterns. 
+* This occurs because the algorithm forces $k$ clusters to be created.
 
 ## Soft \(k\)-means clustering
 
