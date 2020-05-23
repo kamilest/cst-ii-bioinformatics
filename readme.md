@@ -6,6 +6,8 @@ Taken from the supplementary textbook [2] and [Rosalind](http://rosalind.info/pr
 
 [Full index of solved problems.](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/rosalind_index.md)
 
+[Website with notes.](https://kamilest.github.io/cst-ii-bioinformatics/)
+
 --------------
 [1] *Disclaimer.* Algorithms are not necessarily optimised for time and space, but are written so that I can remember and understand how they work by just looking at them.
 
