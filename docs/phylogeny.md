@@ -73,6 +73,15 @@ nav_order: 3
   * it is symmetric
   * satisfies triangle inequality: $\forall i,j,k.\ M_{ij} + M_{jk} \geq M_{ik}$
 
+Additive matrix example
+
+```
+0   13  21  22
+13  0   12  13
+21  12  0   13
+22  13  13  0
+```
+
 Interested in fitting *unique simple* trees to an *additive* matrix.
 
 * every distance between nodes is positive and total distance between nodes is equal to the sum of the distances along the path between the two nodes
