@@ -1,6 +1,16 @@
 import numpy as np
 
-def global_alignment(v, w, scoring_matrix, indel_penalty):
+def dna_scoring(a, b, match_score, mismatch_penalty):
+    if (a == 'A' and b == 'T') \
+            or (a == 'T' and b == 'A') \
+            or (a == 'C' and b == 'G') \
+            or (a == 'G' and b == 'C'):
+        return match_score
+    else:
+        return mismatch_penalty
+
+
+def global_alignment(v, w, match_score, mismatch_penalty, indel_penalty, scoring_matrix=None):
     s = np.zeros((len(v)+1, len(w)+1), dtype=np.int)
     backtrack = {}
 
@@ -20,7 +30,10 @@ def global_alignment(v, w, scoring_matrix, indel_penalty):
             s[i, j] = max(s[i-1, j] - indel_penalty, s[i, j-1] - indel_penalty)
 
             # If match or mismatch
-            score = scoring_matrix[(v[i-1], w[j-1])]
+            if scoring_matrix is not None:
+                score = scoring_matrix[(v[i-1], w[j-1])]
+            else: 
+                score = dna_scoring(v[i-1], w[j-1], match_score, -1 * mismatch_penalty)
             s[i, j] = max(s[i, j], \
                           s[i-1, j-1] + score)
     
@@ -54,27 +67,34 @@ def global_alignment(v, w, scoring_matrix, indel_penalty):
     
     return (score, v_aligned, w_aligned)
 
+
+def parse_scoring_matrix():
+    # Parse the scoring matrix
+    # f = open('blosum62.txt', 'r')
+    f = open('dna_alignment.txt', 'r')
+    aas = f.readline().split() # amino acid codes
+    scoring_matrix = {}
+
+    for i in range(len(aas)):
+        scores_i = f.readline().split()
+        for j in range(len(scores_i)):
+            scoring_matrix[(aas[i], aas[j])] = int(scores_i[j])
+    f.close()
+    return scoring_matrix
+
 # Parse the input
-f = open('ba5e_small.txt', 'r')
+f = open('ba5e.txt', 'r')
 v = f.readline().strip()
 w = f.readline().strip()
 f.close()
 
-# Parse the scoring matrix
-# f = open('blosum62.txt', 'r')
-f = open('dna_alignment.txt', 'r')
-aas = f.readline().split() # amino acid codes
-scoring_matrix = {}
+# ALL MUST BE POSITIVE
+match_score = 1
+mismatch_penalty = 1
+indel_penalty = 4
 
-for i in range(len(aas)):
-    scores_i = f.readline().split()
-    for j in range(len(scores_i)):
-        scoring_matrix[(aas[i], aas[j])] = int(scores_i[j])
-f.close()
+(score, v_aligned, w_aligned) = global_alignment(v, w, match_score, mismatch_penalty, indel_penalty)
 
-
-indel_penalty = 1
-(score, v_aligned, w_aligned) = global_alignment(v, w, scoring_matrix, indel_penalty)
 print(score)
 print(v_aligned)
 print(w_aligned)
