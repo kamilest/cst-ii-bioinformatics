@@ -1,6 +1,6 @@
 import numpy as np
 
-def overlap_alignment(v, w):
+def overlap_alignment(v, w, match_score=1, mismatch_penalty=2, indel_penalty=2):
     s = np.zeros((len(v)+1, len(w)+1))
     backtrack = {}
 
@@ -13,11 +13,11 @@ def overlap_alignment(v, w):
     for i in range(1, len(v)+1):
         for j in range(1, len(w)+1):
             # Match or mismatch
-            score = 1 if v[i-1] == w[j-1] else -2
+            score = match_score if v[i-1] == w[j-1] else -1 * mismatch_penalty
 
             # Indels
-            s[i, j] = np.amax([s[i-1, j] - 2, \
-                               s[i, j-1] - 2, \
+            s[i, j] = np.amax([s[i-1, j] - indel_penalty, \
+                               s[i, j-1] - indel_penalty, \
                                s[i-1, j-1] + score])
             
     
@@ -61,11 +61,18 @@ def overlap_alignment(v, w):
     
     return (int(score_opt), v_aligned, w_aligned)
 
-# Parse the input
-f = open('rosalind_ba5i.txt', 'r')
-v = f.readline().strip()
-w = f.readline().strip()
-f.close()
+
+def parse_input_strings():
+    # Parse the input
+    f = open('rosalind_ba5i.txt', 'r')
+    v = f.readline().strip()
+    w = f.readline().strip()
+    f.close()
+    return v, w
+
+
+v = 'GCACTT'
+w = 'CCCAAT'
 
 (score, v_aligned, w_aligned) = overlap_alignment(v, w)
 print(score)
