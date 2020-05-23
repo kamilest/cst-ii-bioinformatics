@@ -2,7 +2,6 @@
 layout: default
 title: Alignment
 nav_order: 1
-has_children: true
 ---
 
 - [Alignment lectures](#alignment-lectures)
