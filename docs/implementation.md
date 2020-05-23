@@ -5,6 +5,7 @@ nav_order: 7
 ---
 
 ## Comparing DNA Sequences
+
 | Title                      | Rosalind                                    | Implementation                                                                                                |
 |-:--------------------------|-:-------------------------------------------|-:-------------------------------------------------------------------------------------------------------------|
 | Longest common subsequence | [BA5C](http://rosalind.info/problems/ba5c/) | [Implementation](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/problems/BA5C/ba5c.py)         |
