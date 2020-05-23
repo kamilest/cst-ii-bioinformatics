@@ -25,7 +25,8 @@ Edit distance over Hamming distance–DP method of solving through edit graphs.
 ### Overlap detection variant
 
 * Can have unlimited number of gaps at the beginning and the end of the sequence.
-* Initialise first row and column to 0.
+* Initialialisation: set first row and column to 0. (arbitrary gap length from the beginning).
+* Termination: Optimal Score: $\max(\max_{i}F[M, i]), \max_{j}(F[j, N]))$ (arbitrary gap length from the end).
 
 ### Complexity
 * Time: $O(mn)$ 
