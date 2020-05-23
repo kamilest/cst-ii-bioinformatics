@@ -151,9 +151,7 @@ $$... = \mathrm{Pr}(x_1\dots x_i, \pi_i = k)\mathrm{Pr}(x_{i+1}\dots x_N\vert  \
 
 ## Baum-Welch learning
 
-*Expectation maximisation (EM) algorithm for parameter estimation.* Baum-Welch Learning is in contrast to Viterbi Learning, as it does do *soft* assignments of states in the Expectation step.
-
-Our goal here is to compute $P(\pi_i = k | x)$, the responsibility of state $k$ at the $i$-th timestep. To do this, we first compute $P(\pi_i = k, x)$ : 
+*Expectation maximisation (EM) algorithm for parameter estimation.* Baum-Welch Learning is in contrast to Viterbi Learning, as it does do *soft* assignments of states in the Expectation step. Our goal here is to compute $P(\pi_i = k | x)$, the responsibility of state $k$ at the $i$-th timestep. To do this, we first compute $P(\pi_i = k, x)$ : 
 
 $$P(\pi_i = k, x) = P(x_1, \dots, x_i| \pi_i = k) * P(x_{i+1}, \dots, x_N | \pi_i = k)$$
 
