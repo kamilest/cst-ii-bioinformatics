@@ -112,7 +112,9 @@ def construct_trie(patterns):
 
 ## Suffix tree compression
 
-Attempts to avoid storing the pattern trie in memory (reads (pattenrs) from human genome could be upwards of 1TB)
+A *suffix trie* is a trie formed from all suffixes of a genome (text). A *suffix tree* is a compressed suffix trie.
+
+*Suffix tries* attempt to avoid storing the *pattern trie* in memory (reads/patterns from human genome could be upwards of 1TB). *Suffix trees* are used to make *suffix tries* smaller (to also fit in memory).
 
 ### Method
 1. Construct a trie out of the *suffixes* of Genome
