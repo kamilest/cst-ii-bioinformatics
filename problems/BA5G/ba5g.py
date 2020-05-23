@@ -20,10 +20,16 @@ def edit_distance(v, w):
                 
     return int(s[len(v), len(w)])
 
-# Parse the input
-f = open('rosalind_ba5g.txt', 'r')
-v = f.readline().strip()
-w = f.readline().strip()
-f.close()
+
+def parse_input_strings():
+    # Parse the input
+    f = open('rosalind_ba5g.txt', 'r')
+    v = f.readline().strip()
+    w = f.readline().strip()
+    f.close()
+    return v, w
+
+v = 'GCACTT'
+w = 'CCCAAT'
 
 print(edit_distance(v, w))
