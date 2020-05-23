@@ -35,6 +35,9 @@ has_children: true
 
 **Return**: A longest common subsequence of these strings.
 
+
+A common subsequence of two strings is a subsequence that appears in both strings. Substrings are consecutive characters of a string, while subsequences need not be. A longest common subsequence is a common subsequence of maximal length.
+
 ### Method
 
 Dynamic programming algorithm:
