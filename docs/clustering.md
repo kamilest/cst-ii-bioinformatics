@@ -105,7 +105,7 @@ Exact solution for $k$-means clustering: *NP-hard* for $k>1$.
 * $O(nk)$ for deriving $k$ new center approximations
 * for $I$ iterations in $d$ dimensions, $O(nkdI)$; $I \sim k$
 
-#### How can you evaluate the results obtained (number of clusters and their relative position) using the k-means algorithm for clustering? [2013P9Q1]
+*How can you evaluate the results obtained (number of clusters and their relative position) using the k-means algorithm for clustering? [2013P9Q1]*
 
 * The quality of cluster could be assessed by ratio of distance to nearest cluster and cluster diameter. 
 * A cluster can be formed even when there is no similarity between clustered patterns. 
