@@ -1,8 +1,3 @@
----
-layout: default
-title: Implementation index
-nav_order: 7
----
 
 ## Comparing DNA Sequences
 
