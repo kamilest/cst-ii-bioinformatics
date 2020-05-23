@@ -107,7 +107,7 @@ def construct_trie(patterns):
 
 ### Complexity (prefix trie matching)
 
-* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $|\text{Pattern}|$ indicating the length of the longest pattern.
+* Time: $O(\vert \text{Patterns}\vert  + \vert \text{Genome}\vert  \times \vert \text{Pattern}\vert)$, for $\vert\text{Pattern}\vert$ indicating the length of the longest pattern.
 * Space: $O(\vert \text{Patterns}\vert)$
 
 ## Suffix tree compression
@@ -126,9 +126,9 @@ A *suffix trie* is a trie formed from all suffixes of a genome (text). A *suffix
    * length of the substring until the next branching point
 
 ### Complexity (suffix trees)
-* Time, construction: $O(\vert \text{Genome}\vert)$ using Ukkonen's algorithm. $O(\vert \text{Genome}^2\vert)$ if constructed naively.
+* Time, construction: $O(\vert \text{Genome}\vert)$ using Ukkonen's algorithm. $O(\vert \text{Genome}\vert^2)$ if constructed naively.
 * Time, pattern match: $O(\vert \text{Genome}\vert + \vert \text{Patterns} \vert) $
-* Space: $O(\vert \text{Genome}\vert) $(but this is still impractical because of huge constant factors which make the genome not fit into RAM).
+* Space: $O(\vert \text{Genome}\vert)$ (but this is still impractical because of huge constant factors which make the genome not fit into RAM).
 
 
 ## Burrows-Wheeler transform
@@ -201,7 +201,7 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 
 **Output:** all starting positions in `Text` where a string from `Patterns` appears as a substring with at most *d* mismatches.
 
-### Method 1 : Seeding
+### Method 1: Seeding
 
 1. *Seeding*: if at most $d$ mismatches are permitted and the `Text` is split into $d+1$ parts, then by pigeonhole principle at least one part will be matching completely
 2. Sample the slices and see if there is one perfect slice match (seed detection).
