@@ -34,7 +34,7 @@ nav_order: 4
 **Output:** string corresponding to the genome
 
 ## String reconstruction
-*Reconstruct a string from its $k$-mer composition*
+*Reconstruct a string from its $k$-mer composition. A $k$-mer is an arbitrary substring of length $k$.*
 
 **Input:** collection of $k$-mers
 
@@ -60,7 +60,7 @@ NP-Complete.
 
 ### De Bruijn graphs
 
-* represent every $k$-mer as an edge between the prefix and suffix
+* represent every $k$-mer $s_i, \dots, s_{i + k - 1}$ as an edge between a prefix node ($s_i, \dots, s_{i + k - 2}$) and a suffix node ($s_{i + 1}, \dots, s_{i + k - 1}$), with edge label $s_i, \dots, s_{i + k - 1}$.
 * all nodes with identical labels merged together
 * find the *Eulerian cycle* which can be easily converted to a path.
 
