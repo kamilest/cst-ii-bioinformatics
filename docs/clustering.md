@@ -129,7 +129,8 @@ Instead of assigning a point to one cluster, assign *responsibilities* of each p
     * as $\beta \rightarrow \infty$ approaching hard $k$-means
     * as $\beta = 0$, point uniformly belongs to every cluster
     * as $\beta < 0$, point depends less on each cluster and strives to be independent
-* *M-step.* From the responsibility matrix and data points recompute the center points that *maximise?* the probability of every center assignment.
+* *M-step.* From the responsibility matrix and data points recompute the center points that *maximise?* the probability of every center assignment. For the $j$-th coordinate of center $x_i$: 
+$$x_{i, j} = \frac{\text{HiddenMatrix}_i \cdot \text{Data}_j }{\text{HiddenMatrix}_i \cdot \overrightarrow{\mathbf{1}}}$$
 
 ### Complexity
 [[Source]](https://stackoverflow.com/questions/14051171/what-is-the-computational-complexity-of-the-em-algorithm)
