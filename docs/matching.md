@@ -199,6 +199,10 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 5. Repeat until we exhaust the pattern or there are no more suffixes matching the pattern.
 6. Use suffix array to return the positions of the matches
 
+### Complexity (suffix tree pattern matching)
+* Time: $O(\vert \text{Genome}\vert + \vert \text{Patterns}\vert\)$
+* Space: $O(\vert \text{Genome}\vert)$
+
 
 ## Multiple approximate pattern matching problem
 
