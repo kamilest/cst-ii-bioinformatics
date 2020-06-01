@@ -178,7 +178,7 @@ Based on the following subproblem:
 **Output**: Middle edge in the alignment graph of these strings
 
 ### Method (Hirschberg algorithm)
-Computing alignment with linear memory
+Computing alignment with linear memory: *divide-and-conquer approach*
 
 * Use two columns at a time and throw away others
 * Detect middle edge based on where the score is highest in the middle column (forward and reverse)
