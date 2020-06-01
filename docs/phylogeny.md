@@ -341,3 +341,7 @@ For $n$ taxa (species)
 * Pairwise alignment: $O(n^2k^2)$ for strings of length $k$
 * Guide-tree building (e.g. using Neighbour-joining algorithm): $O(n^3)$
 * Additional alignment merging: $O(k^2)$
+
+*Give one example why the multiple alignment, as implemented in the software Clustal, described in the course, needs a guide tree. [2018P7Q3b]*
+
+> Let’s consider for instance the three sequences: TAGT, TGT, TAT. Not all the pairwise alignments build well into multiple sequence alignment. Instead the tree guided, progressive alignment builds a final alignment by merging sub-alignments.
