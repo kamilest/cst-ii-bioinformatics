@@ -126,7 +126,7 @@ A *paired $k$-mer* is a pair of $k$-mers at a *fixed* distance $d$ apart in the 
 **Problem:** Not every Eulerian path in the paired de Bruijn graph constructed from a (k, d)-mer composition spells out a
 solution of the String Reconstruction from Read-Pairs Problem. To solve this, generate all Eulerian paths and output the path that spells out a string whose paired (k, d)-mer composition is equal to the initial set of (k, d)-mers.
 
-### Constraints
+## Constraints
 Assumptions include:
 
 * *perfect coverage* of genome by reads 
@@ -143,3 +143,11 @@ Assumptions include:
 are expected to have approximately t times higher coverage than k-mers that appear just once. Needless to say, coverage varies across the genome, and this condition is often violated. As a result, existing assemblers often assemble repetitive regions in genomes without knowing the exact number of times each k-mer from this region occurs in the
 genome.
 * *distances* between reads within read-pairs are *exact*
+
+### Impact of k-mer length
+The optimal $k$-mer size depends on the read length and the read depth and sequence complexity. 
+
+* longer reads and/or higher read depth $\rightarrow$  use larger $k$-mers which could resolve complex areas of the graph 
+* short reads are short and/or low read depth $\rightarrow$ use shorter $k$-mers
+* many separate disconnected subgraphs in assembly graph (i.e. there are many small groups of contigs that have no connections to the rest of the graph) $\rightarrow$  $k$-mer size may be too large
+* connected (i.e. all contigs are tied together in a single graph structure) but is very dense/tangled assembly graph $\rightarrow$ k-mer size may be too small
