@@ -9,6 +9,6 @@ Algorithms [1] for the Part II [Bioinformatics](https://www.cl.cam.ac.uk/teachin
 Other resources: supplementary textbook [2] and [Rosalind](http://rosalind.info/problems/list-view/?location=bioinformatics-textbook-track).
 
 --------------
-[1] Algorithms are not optimised for time and space, but are written so that I can remember and understand how they work by just looking at them.
+[1] Algorithms are not optimised for time and space, but are written so that I can remember and understand how they work by looking at them.
 
 [2] Compeau, P. & Pevzner, P.A. (2015). *Bioinformatics algorithms: an active learning approach*. Active Learning Publishers.
