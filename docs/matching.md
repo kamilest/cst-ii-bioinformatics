@@ -16,8 +16,8 @@ nav_order: 5
     - [Complexity (prefix trie matching)](#complexity-prefix-trie-matching)
   - [Suffix tree compression](#suffix-tree-compression)
     - [Method](#method)
-    - [Complexity (suffix tries)](#complexity-suffix-tries)
-  - [Suffix arrays](#suffix-arrays)	
+    - [Complexity (suffix trees)](#complexity-suffix-trees)
+  - [Suffix arrays](#suffix-arrays)
     - [Method (suffix array construction)](#method-suffix-array-construction)
   - [Burrows-Wheeler transform](#burrows-wheeler-transform)
     - [Method](#method-1)
@@ -28,8 +28,10 @@ nav_order: 5
     - [Last-to-first property](#last-to-first-property)
   - [Pattern matching with Burrows-Wheeler transform](#pattern-matching-with-burrows-wheeler-transform)
     - [Method](#method-3)
+    - [Complexity (suffix tree pattern matching)](#complexity-suffix-tree-pattern-matching)
   - [Multiple approximate pattern matching problem](#multiple-approximate-pattern-matching-problem)
-    - [Method](#method-4)
+    - [Method 1: Seeding](#method-1-seeding)
+    - [Method 2: Using BWT](#method-2-using-bwt)
   - [BLAST: comparing a sequence against a database](#blast-comparing-a-sequence-against-a-database)
 
 # Genomics pattern matching
@@ -200,7 +202,7 @@ The $i$-th occurrence of a character in last column corresponds to the $i$-th oc
 6. Use suffix array to return the positions of the matches
 
 ### Complexity (suffix tree pattern matching)
-* Time: $O(\vert \text{Genome}\vert + \vert \text{Patterns}\vert\)$
+* Time: $O(\vert \text{Genome}\vert + \vert \text{Patterns}\vert)$
 * Space: $O(\vert \text{Genome}\vert)$
 
 
