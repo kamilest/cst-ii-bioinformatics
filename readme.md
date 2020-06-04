@@ -3,7 +3,7 @@
 Algorithms [1] for the Part II [Bioinformatics](https://www.cl.cam.ac.uk/teaching/1920/Bioinfo/) course at Cambridge University.
 
 * [Full index of solved problems](https://github.com/kamilest/cst-ii-bioinformatics/blob/master/rosalind_index.md).
-* [Website with notes](https://kamilest.github.io/cst-ii-bioinformatics/).
+* [Personal notes](https://kamilest.github.io/cst-ii-bioinformatics/).
 
 
 Other resources: supplementary textbook [2] and [Rosalind](http://rosalind.info/problems/list-view/?location=bioinformatics-textbook-track).
